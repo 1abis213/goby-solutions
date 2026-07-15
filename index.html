@@ -169,7 +169,7 @@
         </a>
         <nav style="display:flex;align-items:center;gap:2.5rem;font-size:.8rem;font-weight:400;text-transform:uppercase;letter-spacing:.12em">
           <a href="#catalog" style="color:var(--text2);transition:color .3s" data-i18n="navCatalog" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Catalogue</a>
-          <a href="guide.html" style="color:var(--text2);transition:color .3s" data-i18n="navGuide" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Guide</a>
+          <a href="#" onclick="return showGuide('overview')" style="color:var(--text2);transition:color .3s" data-i18n="navGuide" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Guide</a>
           <a href="#faq" style="color:var(--text2);transition:color .3s" data-i18n="navFAQ" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">FAQ</a>
           <a href="#about" style="color:var(--text2);transition:color .3s" data-i18n="navAbout" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Maison</a>
           <a href="#contact" style="color:var(--text2);transition:color .3s" data-i18n="navContact" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Contact</a>
@@ -358,10 +358,10 @@
             <p class="section-desc" style="margin:.75rem auto 0" data-i18n="guideDesc">Nos conseils pour faire le bon choix, piece par piece.</p>
           </div>
           <nav class="guide-nav" id="guideNav">
-            <a href="guide.html" onclick="return showGuide('overview')" class="active" data-i18n="gNavOverview">Vue d'ensemble</a>
-            <a href="guide-washer.html" onclick="return showGuide('washer')" data-i18n="gNavWasher">Laveuse-secheuse</a>
-            <a href="guide-fridge.html" onclick="return showGuide('fridge')" data-i18n="gNavFridge">Refrigerateur</a>
-            <a href="guide-furnace.html" onclick="return showGuide('furnace')" data-i18n="gNavFurnace">Fournaise</a>
+            <a href="#" onclick="return showGuide('overview')" class="active" data-i18n="gNavOverview">Vue d'ensemble</a>
+            <a href="#" onclick="return showGuide('washer')" data-i18n="gNavWasher">Laveuse-secheuse</a>
+            <a href="#" onclick="return showGuide('fridge')" data-i18n="gNavFridge">Refrigerateur</a>
+            <a href="#" onclick="return showGuide('furnace')" data-i18n="gNavFurnace">Fournaise</a>
           </nav>
 
           <div class="guide-content page-guide active" id="guideOverview">
@@ -442,9 +442,9 @@
         </div>
         <p style="font-size:.75rem;color:var(--text2);letter-spacing:.05em" data-i18n="footerCopy">© MMXXVI - GOBY Montréal</p>
         <div style="display:flex;gap:1rem;font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;flex-wrap:wrap;justify-content:center">
-          <a href="terms.html" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerTerms">Conditions</a>
-          <a href="privacy.html" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerPrivacy">Confidentialite</a>
-          <a href="returns.html" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerReturns">Retours & Garantie</a>
+          <a href="#" onclick="return openLegal('terms')" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerTerms">Conditions</a>
+          <a href="#" onclick="return openLegal('privacy')" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerPrivacy">Confidentialite</a>
+          <a href="#" onclick="return openLegal('returns')" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerReturns">Retours & Garantie</a>
           <span style="opacity:.3">|</span>
           <a href="https://www.facebook.com/gobysolutions" target="_blank" rel="noopener" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Facebook</a>
           <a href="https://wa.me/15147991291" target="_blank" rel="noopener" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">WhatsApp</a>
@@ -750,8 +750,10 @@
         const target = document.getElementById('guide' + page.charAt(0).toUpperCase() + page.slice(1));
         if(target) target.classList.add('active');
         document.querySelectorAll('#guideNav a').forEach(a => a.classList.remove('active'));
-        const link = document.querySelector('#guideNav a[href*="' + page + '"]');
-        if(link) link.classList.add('active');
+        var pageMap = {overview:'overview', washer:'washer', fridge:'fridge', furnace:'furnace'};
+        document.querySelectorAll('#guideNav a').forEach(function(a){
+          if(a.getAttribute('onclick') && a.getAttribute('onclick').includes(pageMap[page] || page)) a.classList.add('active');
+        });
         overlay.scrollTop = 0;
         return false;
       }
@@ -780,36 +782,18 @@
         const overlay = document.getElementById('legalSection');
         const l = document.documentElement.lang;
         const data = legalContent[page];
-        if(!data) return;
+        if(!data) return false;
         document.getElementById('legalContent').innerHTML = data[l] || data.fr;
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
         overlay.scrollTop = 0;
+        return false;
       }
 
       function closeLegal(){
         document.getElementById('legalSection').classList.remove('active');
         document.body.style.overflow = '';
       }
-
-      (function initFakePages(){
-        document.addEventListener('click', function(e){
-          const a = e.target.closest('a[href$=".html"]');
-          if(!a) return;
-          const page = a.getAttribute('href').replace('.html','');
-          const guidePages = ['guide','guide-washer','guide-fridge','guide-furnace'];
-          if(guidePages.includes(page)){
-            e.preventDefault();
-            if(page === 'guide') showGuide('overview');
-            else showGuide(page.split('-')[1]);
-          }
-          const legalPages = ['terms','privacy','returns'];
-          if(legalPages.includes(page)){
-            e.preventDefault();
-            openLegal(page);
-          }
-        });
-      })();
 
       const waBubble = document.getElementById('waBubble');
       const waClose = document.getElementById('waClose');
