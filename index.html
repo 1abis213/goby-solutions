@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <style>
       *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
       html{scroll-behavior:smooth}
@@ -59,6 +60,8 @@
       .btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,149,42,.3)}
       .btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.15)}
       .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+      .nav-panel{position:fixed;top:0;right:0;width:clamp(280px,38vw,420px);height:100%;z-index:250;pointer-events:none}.nav-panel.open{pointer-events:auto}.nav-prelayers{position:absolute;top:0;right:0;width:clamp(280px,38vw,420px);height:100%;pointer-events:none;z-index:0}.nav-prelayer{position:absolute;top:0;right:0;width:100%;height:100%}.nav-panel-content{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:center;padding:6rem 2.5rem 2.5rem;overflow-y:auto}.nav-panel-item{display:block;font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3.5rem);font-weight:700;color:#fff;text-decoration:none;line-height:1.1;padding:.35rem 0;transition:color .3s;text-transform:uppercase;letter-spacing:-.02em;transform-origin:0 50%}.nav-panel-item:hover{color:var(--gold)}.nav-panel-item .nav-label{display:inline-block}.nav-panel-divider{height:1px;background:var(--border);margin:.5rem 0}.nav-panel-langs{display:flex;gap:6px;margin-top:1.5rem}.nav-panel-wa{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;font-size:.85rem;color:var(--text2);transition:color .3s}.nav-panel-wa:hover{color:var(--gold)}
 
       .brand-loop{position:relative;overflow:hidden;width:100%;--brand-gap:56px;--brand-logoH:30px}.brand-loop__track{display:flex;width:max-content;will-change:transform;user-select:none;animation:brand-scroll 40s linear infinite}.brand-loop__track.slow{animation-duration:180s}.brand-loop__list{display:flex;align-items:center}.brand-loop__item{flex:0 0 auto;margin-right:var(--brand-gap);line-height:1;display:flex;align-items:center}.brand-loop__item img{display:block;height:var(--brand-logoH);width:auto;object-fit:contain;filter:grayscale(1) brightness(1.5) opacity(.35);transition:all .5s}.brand-loop__item img:hover{filter:grayscale(0) brightness(1) opacity(1)}.brand-loop__item:last-child{margin-right:var(--brand-gap)}.brand-loop--fade::before,.brand-loop--fade::after{content:'';position:absolute;top:0;bottom:0;width:clamp(40px,10%,160px);pointer-events:none;z-index:10}.brand-loop--fade::before{left:0;background:linear-gradient(to right,#0a0a0a 0%,rgba(10,10,10,0) 100%)}.brand-loop--fade::after{right:0;background:linear-gradient(to left,#0a0a0a 0%,rgba(10,10,10,0) 100%)}@keyframes brand-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.brand-loop__track{animation:none}}
 
@@ -155,8 +158,9 @@
         .modal .modal-img-wrap{min-height:200px;border-radius:20px 20px 0 0}
         .modal .modal-body{padding:1.5rem}
         .modal .modal-actions .btn{min-width:100%}
-        .nav-links{display:none;position:fixed;top:4.5rem;left:0;right:0;background:rgba(10,10,10,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);flex-direction:column;padding:1.5rem;gap:1rem;z-index:99;max-height:calc(100vh - 4.5rem);overflow-y:auto}.nav-links.open{display:flex}.nav-links a,.nav-links div{margin:0!important}.nav-links .btn-gold{text-align:center;padding:.7rem 1.25rem!important}.nav-links .lang-wrap{gap:4px;margin-top:.5rem}
         .hamburger{display:flex}
+        .nav-panel{width:100%!important}
+        .nav-prelayers{width:100%!important}
         .hero-stats{gap:1.5rem!important;flex-wrap:wrap;justify-content:center}.hero-stat{text-align:center}
         .about-grid{grid-template-columns:1fr!important;gap:2.5rem!important}
         .about-features{grid-template-columns:1fr!important;gap:.5rem!important}
@@ -179,10 +183,7 @@
         .stat-number{font-size:1.5rem!important}
         .stat-label{font-size:.6rem!important}
       }
-      .nav-links{display:flex}
-      @media(min-width:769px){
-        .hamburger{display:none}
-      }
+      .hamburger{display:flex;z-index:300;position:relative}
     </style>
   </head>
   <body>
@@ -195,20 +196,28 @@
           <span style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;letter-spacing:.02em">GOBY</span>
         </a>
         <button class="hamburger" id="hamburger" aria-label="Menu" style="background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:.5rem;line-height:1">☰</button>
-        <nav class="nav-links" id="navLinks" style="align-items:center;gap:2.5rem;font-size:.8rem;font-weight:400;text-transform:uppercase;letter-spacing:.12em">
-          <a href="#catalog" style="color:var(--text2);transition:color .3s" data-i18n="navCatalog" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Catalogue</a>
-          <a href="#" onclick="return showGuide('overview')" style="color:var(--text2);transition:color .3s" data-i18n="navGuide" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Guide</a>
-          <a href="#faq" style="color:var(--text2);transition:color .3s" data-i18n="navFAQ" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">FAQ</a>
-          <a href="#about" style="color:var(--text2);transition:color .3s" data-i18n="navAbout" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Maison</a>
-          <a href="#contact" style="color:var(--text2);transition:color .3s" data-i18n="navContact" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Contact</a>
-          <a href="https://wa.me/15147991291" target="_blank" rel="noopener" class="btn btn-gold" style="padding:.5rem 1.25rem;font-size:.7rem;text-transform:none;letter-spacing:normal" data-i18n="headerWA">WhatsApp</a>
-          <div class="lang-wrap" style="display:flex;gap:4px">
-            <button class="lang-btn active" data-lang="fr" onclick="switchLang('fr')">FR</button>
-            <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
-          </div>
-        </nav>
       </div>
     </header>
+
+    <div class="nav-panel" id="navPanel">
+      <div class="nav-prelayers" id="navPrelayers">
+        <div class="nav-prelayer" style="background:#1a1a1a"></div>
+        <div class="nav-prelayer" style="background:#111111"></div>
+      </div>
+      <nav class="nav-panel-content" id="navPanelContent">
+        <a class="nav-panel-item" href="#catalog" onclick="closeNavPanel()"><span class="nav-label" data-i18n="navCatalog">Catalogue</span></a>
+        <a class="nav-panel-item" href="#" onclick="return showGuide('overview')"><span class="nav-label" data-i18n="navGuide">Guide</span></a>
+        <a class="nav-panel-item" href="#faq" onclick="closeNavPanel()"><span class="nav-label" data-i18n="navFAQ">FAQ</span></a>
+        <a class="nav-panel-item" href="#about" onclick="closeNavPanel()"><span class="nav-label" data-i18n="navAbout">Maison</span></a>
+        <a class="nav-panel-item" href="#contact" onclick="closeNavPanel()"><span class="nav-label" data-i18n="navContact">Contact</span></a>
+        <div class="nav-panel-divider"></div>
+        <a class="nav-panel-item nav-panel-wa" href="https://wa.me/15147991291" target="_blank" rel="noopener" onclick="closeNavPanel()" style="font-size:1rem;text-transform:none;letter-spacing:normal;font-family:Inter,sans-serif;font-weight:400" data-i18n="headerWA">WhatsApp</a>
+        <div class="nav-panel-langs">
+          <button class="lang-btn active" data-lang="fr" onclick="switchLang('fr')">FR</button>
+          <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+        </div>
+      </nav>
+    </div>
 
     <main>
       <section id="home" style="min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:6rem 0 3rem">
@@ -770,6 +779,7 @@
       }
 
       function showGuide(page){
+        closeNavPanel();
         const overlay = document.getElementById('guideSection');
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -806,6 +816,7 @@
       };
 
       function openLegal(page){
+        closeNavPanel();
         const overlay = document.getElementById('legalSection');
         const l = document.documentElement.lang;
         const data = legalContent[page];
@@ -849,8 +860,24 @@
       renderCatalog();
       document.getElementById('brandTrack').addEventListener('mouseenter',function(){this.classList.add('slow')});
       document.getElementById('brandTrack').addEventListener('mouseleave',function(){this.classList.remove('slow')});
-      document.getElementById('hamburger').addEventListener('click',function(){document.getElementById('navLinks').classList.toggle('open')});
-      document.getElementById('navLinks').addEventListener('click',function(e){if(e.target.tagName==='A'||e.target.tagName==='BUTTON'){this.classList.remove('open')}});
+      var navPanel = document.getElementById('navPanel'), prelayers = document.querySelectorAll('.nav-prelayer'), panelContent = document.getElementById('navPanelContent'), panelItems = panelContent.querySelectorAll('.nav-label, .nav-panel-wa, .nav-panel-langs'), navOpen = false;
+      function openNavPanel(){
+        if(navOpen) return; navOpen = true; navPanel.classList.add('open');
+        gsap.set([prelayers, panelContent], {xPercent:110});
+        gsap.set(panelItems, {y:40,opacity:0});
+        var tl = gsap.timeline({onComplete:function(){document.addEventListener('keydown',navEsc)}});
+        tl.to(prelayers,{xPercent:0,duration:.5,ease:'power4.out',stagger:.1},0);
+        tl.to(panelContent,{xPercent:0,duration:.55,ease:'power4.out'},.15);
+        tl.to(panelItems,{y:0,opacity:1,duration:.7,ease:'power4.out',stagger:.08},.35);
+      }
+      function closeNavPanel(){
+        if(!navOpen) return; navOpen = false; navPanel.classList.remove('open');
+        document.removeEventListener('keydown',navEsc);
+        gsap.to([panelContent, prelayers],{xPercent:110,duration:.35,ease:'power3.in',overwrite:'auto',onComplete:function(){gsap.set(panelItems,{y:40,opacity:0})}});
+      }
+      function navEsc(e){if(e.key==='Escape') closeNavPanel()}
+      document.getElementById('hamburger').addEventListener('click',function(){navOpen?closeNavPanel():openNavPanel()});
+      document.addEventListener('click',function(e){if(navOpen&&!navPanel.contains(e.target)&&e.target!==document.getElementById('hamburger')&&!document.getElementById('hamburger').contains(e.target))closeNavPanel()});
 
       document.querySelector('form').addEventListener('submit', function(e){
         const raw = document.getElementById('contactInput').value.replace(/[\s\-\+\(\)\.]/g, '');
