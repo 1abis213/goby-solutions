@@ -130,9 +130,12 @@
       .faq-a.open{max-height:300px;padding:0 1.5rem 1.25rem}
       .faq-a p{color:var(--text2);font-size:.85rem;line-height:1.7}
 
-      .page-guide{display:none;animation:fadePage .4s ease}
-      .page-guide.active{display:block}
-      @keyframes fadePage{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
+      .guide-overlay{position:fixed;inset:0;z-index:500;background:var(--bg);overflow-y:auto;display:none;padding:2rem}
+      .guide-overlay.active{display:block;animation:fadePage .3s ease}
+      @keyframes fadePage{0%{opacity:0}100%{opacity:1}}
+      .guide-back{display:inline-flex;align-items:center;gap:.5rem;color:var(--text2);font-size:.8rem;cursor:pointer;background:none;border:none;font-family:inherit;transition:color .3s;margin-bottom:1rem;padding:.5rem 0}
+      .guide-back:hover{color:var(--gold)}
+      .guide-back .arrow{font-size:1.1rem;line-height:1}
       .guide-nav{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
       .guide-nav a{padding:.5rem 1rem;border-radius:8px;font-size:.8rem;color:var(--text2);border:1px solid var(--border);transition:all .3s;cursor:pointer}
       .guide-nav a:hover,.guide-nav a.active{color:var(--gold);border-color:var(--gold);background:rgba(201,149,42,.05)}
@@ -343,9 +346,10 @@
         </div>
       </section>
 
-      <section id="guideSection" class="section page-guide">
+      <div id="guideSection" class="guide-overlay">
         <div class="container">
-          <div class="reveal" style="text-align:center;margin-bottom:2rem">
+          <button class="guide-back" onclick="closeGuide()"><span class="arrow">←</span> <span data-i18n="guideBack">Retour au site</span></button>
+          <div style="text-align:center;margin-bottom:2rem">
             <span class="section-label" data-i18n="guideLabel">Guide d'achat</span>
             <h2 class="section-title" data-i18n="guideTitle">Comment choisir vos appareils.</h2>
             <p class="section-desc" style="margin:.75rem auto 0" data-i18n="guideDesc">Nos conseils pour faire le bon choix, piece par piece.</p>
@@ -405,7 +409,7 @@
             <p data-i18n="gFurnaceP4">750-1000 $ pour un modele standard 80% AFUE. 1000-1500 $ pour un modele 96% AFUE. 1500-2500 $ pour le haut de gamme avec moteur variable et garantie prolongee.</p>
           </div>
         </div>
-      </section>
+      </div>
     </main>
 
     <div id="waPopup" style="position:fixed;bottom:2rem;right:2rem;z-index:99;display:flex;flex-direction:column;align-items:flex-end;gap:.75rem">
@@ -509,6 +513,7 @@
           faq3q: 'Quelle est votre politique de retour ?', faq3a: 'Vous disposez de 30 jours pour retourner un appareil en bon etat. Les frais de retour peuvent s\'appliquer. Consultez notre politique complete sur demande.',
           faq4q: 'Proposez-vous des garanties ?', faq4a: 'Tous nos appareils neufs incluent la garantie fabricant. Les appareils certifies pre-appartenance sont couverts par une garantie GOBY de 90 jours.',
           faq5q: 'Puis-je payer par virement Interac ?', faq5a: 'Oui, nous acceptons le virement Interac, les cartes de credit et PayPal. Contactez-nous pour les details de paiement.',
+          guideBack: 'Retour au site',
           guideLabel: "Guide d'achat", guideTitle: 'Comment choisir vos appareils.', guideDesc: 'Nos conseils pour faire le bon choix, piece par piece.',
           gNavOverview: "Vue d'ensemble", gNavWasher: 'Laveuse-secheuse', gNavFridge: 'Refrigerateur', gNavFurnace: 'Fournaise',
           gOverviewTitle: "Guide d'achat complet",
@@ -574,6 +579,7 @@
           faq3q: 'What is your return policy?', faq3a: 'You have 30 days to return an appliance in good condition. Return fees may apply. See our full policy on request.',
           faq4q: 'Do you offer warranties?', faq4a: 'All new appliances include the manufacturer warranty. Certified pre-owned appliances are covered by a 90-day GOBY warranty.',
           faq5q: 'Can I pay by Interac e-Transfer?', faq5a: 'Yes, we accept Interac e-Transfer, credit cards, and PayPal. Contact us for payment details.',
+          guideBack: 'Back to site',
           guideLabel: 'Buying Guide', guideTitle: 'How to choose your appliances.', guideDesc: 'Our tips to make the right choice, piece by piece.',
           gNavOverview: 'Overview', gNavWasher: 'Washer & Dryer', gNavFridge: 'Refrigerator', gNavFurnace: 'Furnace',
           gOverviewTitle: 'Complete Buying Guide',
@@ -709,7 +715,9 @@
         document.body.style.overflow = '';
       }
 
-      document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+      document.addEventListener('keydown', e => {
+        if(e.key === 'Escape'){ closeModal(); closeGuide(); }
+      });
 
       function toggleFAQ(btn){
         const answer = btn.nextElementSibling;
@@ -719,16 +727,22 @@
       }
 
       function showGuide(page){
-        const section = document.getElementById('guideSection');
-        section.classList.add('active');
-        document.querySelectorAll('.page-guide').forEach(g => g.classList.remove('active'));
+        const overlay = document.getElementById('guideSection');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        document.querySelectorAll('.guide-content').forEach(g => g.classList.remove('active'));
         const target = document.getElementById('guide' + page.charAt(0).toUpperCase() + page.slice(1));
         if(target) target.classList.add('active');
         document.querySelectorAll('#guideNav a').forEach(a => a.classList.remove('active'));
         const link = document.querySelector('#guideNav a[href*="' + page + '"]');
         if(link) link.classList.add('active');
-        document.getElementById('guideSection').scrollIntoView({ behavior: 'smooth' });
+        overlay.scrollTop = 0;
         return false;
+      }
+
+      function closeGuide(){
+        document.getElementById('guideSection').classList.remove('active');
+        document.body.style.overflow = '';
       }
 
       (function initFakePages(){
