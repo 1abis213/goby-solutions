@@ -1,0 +1,9 @@
+# Ignore all unrelated project files
+index1*
+index1-MVP*
+finalmvp*
+mvp1*
+RAPPORT-*
+build.*
+single_page_*
+translate.*
