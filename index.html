@@ -60,7 +60,7 @@
       .btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.15)}
       .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
 
-      .brand-loop{position:relative;overflow:hidden;width:100%;--brand-gap:56px;--brand-logoH:30px}.brand-loop__track{display:flex;width:max-content;will-change:transform;user-select:none;animation:brand-scroll 40s linear infinite;transition:animation-duration .3s}.brand-loop__track:hover{animation-duration:180s}.brand-loop__list{display:flex;align-items:center}.brand-loop__item{flex:0 0 auto;margin-right:var(--brand-gap);line-height:1;display:flex;align-items:center}.brand-loop__item img{display:block;height:var(--brand-logoH);width:auto;object-fit:contain;filter:grayscale(1) brightness(1.5) opacity(.35);transition:all .5s}.brand-loop__item img:hover{filter:grayscale(0) brightness(1) opacity(1)}.brand-loop__item:last-child{margin-right:var(--brand-gap)}.brand-loop--fade::before,.brand-loop--fade::after{content:'';position:absolute;top:0;bottom:0;width:clamp(40px,10%,160px);pointer-events:none;z-index:10}.brand-loop--fade::before{left:0;background:linear-gradient(to right,#0a0a0a 0%,rgba(10,10,10,0) 100%)}.brand-loop--fade::after{right:0;background:linear-gradient(to left,#0a0a0a 0%,rgba(10,10,10,0) 100%)}@keyframes brand-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.brand-loop__track{animation:none}}
+      .brand-loop{position:relative;overflow:hidden;width:100%;--brand-gap:56px;--brand-logoH:30px}.brand-loop__track{display:flex;width:max-content;will-change:transform;user-select:none;animation:brand-scroll 40s linear infinite}.brand-loop__track.slow{animation-duration:180s}.brand-loop__list{display:flex;align-items:center}.brand-loop__item{flex:0 0 auto;margin-right:var(--brand-gap);line-height:1;display:flex;align-items:center}.brand-loop__item img{display:block;height:var(--brand-logoH);width:auto;object-fit:contain;filter:grayscale(1) brightness(1.5) opacity(.35);transition:all .5s}.brand-loop__item img:hover{filter:grayscale(0) brightness(1) opacity(1)}.brand-loop__item:last-child{margin-right:var(--brand-gap)}.brand-loop--fade::before,.brand-loop--fade::after{content:'';position:absolute;top:0;bottom:0;width:clamp(40px,10%,160px);pointer-events:none;z-index:10}.brand-loop--fade::before{left:0;background:linear-gradient(to right,#0a0a0a 0%,rgba(10,10,10,0) 100%)}.brand-loop--fade::after{right:0;background:linear-gradient(to left,#0a0a0a 0%,rgba(10,10,10,0) 100%)}@keyframes brand-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.brand-loop__track{animation:none}}
 
       .lang-btn{background:transparent;color:var(--text2);border:1px solid var(--border);padding:.3rem .7rem;border-radius:6px;font-size:.65rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;transition:all .3s;cursor:pointer}
       .lang-btn.active{background:var(--gold);color:#0a0a0a;border-color:var(--gold)}
@@ -80,9 +80,7 @@
       .hero-glow2{position:absolute;bottom:-20%;left:-10%;width:50vmin;height:50vmin;border-radius:50%;background:radial-gradient(circle,rgba(201,149,42,.05),transparent 70%);pointer-events:none;animation:heroPulse 8s ease-in-out infinite reverse}
       @keyframes heroPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.15);opacity:1}}
       @keyframes waBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-      @keyframes waSlideUp{from{opacity:0;transform:translateY(10px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
-      @keyframes waSlideDown{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(10px) scale(.95)}}
-      .wa-bubble{background:var(--bg2);border:1px solid rgba(37,211,102,.3);border-radius:16px 16px 4px 16px;padding:1rem 1.25rem;max-width:260px;box-shadow:0 8px 40px rgba(0,0,0,.5);opacity:0;transform:translateY(10px) scale(.95);pointer-events:none;transition:none}.wa-bubble.visible{animation:waSlideUp .4s cubic-bezier(.22,1,.36,1) forwards;pointer-events:auto}.wa-bubble.hiding{animation:waSlideDown .3s cubic-bezier(.22,1,.36,1) forwards}.wa-close-btn{background:rgba(255,255,255,.08);border:none;border-radius:50%;width:1.75rem;height:1.75rem;display:none;align-items:center;justify-content:center;color:var(--text2);font-size:.75rem;cursor:pointer;transition:background .2s}.wa-close-btn:hover{background:rgba(255,255,255,.15)}.wa-close-btn.visible{display:flex}.wa-icon-link:hover{transform:scale(1.1)}
+      .wa-bubble{background:var(--bg2);border:1px solid rgba(37,211,102,.3);border-radius:16px 16px 4px 16px;padding:1rem 1.25rem;max-width:260px;box-shadow:0 8px 40px rgba(0,0,0,.5);opacity:0;transform:translateY(10px) scale(.95);pointer-events:none;transition:opacity .4s cubic-bezier(.22,1,.36,1),transform .4s cubic-bezier(.22,1,.36,1)}.wa-bubble.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}.wa-close-btn{background:rgba(255,255,255,.08);border:none;border-radius:50%;width:1.75rem;height:1.75rem;display:none;align-items:center;justify-content:center;color:var(--text2);font-size:.75rem;cursor:pointer;transition:background .2s}.wa-close-btn:hover{background:rgba(255,255,255,.15)}.wa-close-btn.show{display:flex}.wa-icon-link:hover{transform:scale(1.1)}
       form input::placeholder,form textarea::placeholder{color:#555}
 
       .count-up{display:inline-block}
@@ -216,7 +214,7 @@
         <div class="container" style="text-align:center">
           <p style="font-size:.6rem;font-weight:500;text-transform:uppercase;letter-spacing:.25em;color:var(--text2);margin-bottom:1.5rem" data-i18n="brandsTitle">Marques d'exception</p>
           <div class="brand-loop brand-loop--fade" role="region" aria-label="Brand partners" style="--brand-gap:56px;--brand-logoH:30px">
-            <div class="brand-loop__track">
+            <div class="brand-loop__track" id="brandTrack">
               <ul class="brand-loop__list" role="list">
                 <li class="brand-loop__item" role="listitem"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/LG_logo_(2015).svg" alt="LG" loading="lazy" decoding="async" draggable="false" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%2236%22%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.35em%22 font-family=%22sans-serif%22 font-size=%2216%22 fill=%22%23555%22%3ELG%3C/text%3E%3C/svg%3E'" /></li>
                 <li class="brand-loop__item" role="listitem"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Samsung_Logo.svg" alt="Samsung" loading="lazy" decoding="async" draggable="false" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%2236%22%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.35em%22 font-family=%22sans-serif%22 font-size=%2214%22 fill=%22%23555%22%3ESamsung%3C/text%3E%3C/svg%3E'" /></li>
@@ -799,29 +797,20 @@
 
       const waBubble = document.getElementById('waBubble');
       const waClose = document.getElementById('waClose');
-      let waHideTimer, waShowTimer, waDismissed = false, waAnimating = false;
+      let waTimer, waDismissed = false;
 
       function showWABubble(){
-        if(waDismissed || waAnimating) return;
-        clearTimeout(waShowTimer);
-        waBubble.classList.remove('hiding');
-        waBubble.classList.add('visible');
-        waClose.classList.add('visible');
-        waHideTimer = setTimeout(hideWABubble, 8000);
+        if(waDismissed) return;
+        waBubble.classList.add('show');
+        waClose.classList.add('show');
+        clearTimeout(waTimer);
+        waTimer = setTimeout(hideWABubble, 8000);
       }
 
-      function hideWABubble(onEnd){
-        if(waAnimating) return;
-        clearTimeout(waHideTimer);
-        waBubble.classList.remove('visible');
-        waBubble.classList.add('hiding');
-        waClose.classList.remove('visible');
-        waAnimating = true;
-        var done = function(){
-          waAnimating = false;
-          if(!waDismissed && !onEnd) waShowTimer = setTimeout(showWABubble, 25000);
-        };
-        setTimeout(done, 350);
+      function hideWABubble(){
+        waBubble.classList.remove('show');
+        waClose.classList.remove('show');
+        if(!waDismissed) setTimeout(showWABubble, 25000);
       }
 
       waClose.addEventListener('click', () => {
@@ -831,6 +820,8 @@
 
       setTimeout(showWABubble, 4000);
       renderCatalog();
+      document.getElementById('brandTrack').addEventListener('mouseenter',function(){this.classList.add('slow')});
+      document.getElementById('brandTrack').addEventListener('mouseleave',function(){this.classList.remove('slow')});
 
       document.querySelector('form').addEventListener('submit', function(e){
         const raw = document.getElementById('contactInput').value.replace(/[\s\-\+\(\)\.]/g, '');
