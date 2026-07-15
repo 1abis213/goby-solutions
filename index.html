@@ -83,6 +83,50 @@
       form input::placeholder,form textarea::placeholder{color:#555}
 
       .count-up{display:inline-block}
+
+      .catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
+      .cat-header{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);display:flex;align-items:center;gap:1rem}
+      .cat-header:first-of-type{margin-top:0;border-top:none;padding-top:0}
+      .cat-header h3{font-family:'Playfair Display',serif;font-size:1.35rem;color:#fff;font-weight:600}
+      .cat-header span{font-size:.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:.12em}
+      .cat-header .line{flex:1;height:1px;background:var(--border)}
+
+      .product-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .4s cubic-bezier(.22,1,.36,1);cursor:pointer}
+      .product-card:hover{transform:translateY(-6px);border-color:rgba(201,149,42,.3);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+      .product-card .img-wrap{position:relative;padding-top:70%;background:var(--bg3);overflow:hidden;display:flex;align-items:center;justify-content:center}
+      .product-card .img-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+      .product-card:hover .img-wrap img{transform:scale(1.05)}
+      .product-card .info{padding:1.25rem 1.5rem 1.5rem}
+      .product-card .info h4{font-family:'Playfair Display',serif;font-size:1rem;color:#fff;font-weight:600;margin-bottom:.35rem;line-height:1.3}
+      .product-card .info .cat-tag{font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);font-weight:500}
+      .product-card .info .price{font-size:1.35rem;font-weight:600;color:var(--gold-light);font-family:'Playfair Display',serif;margin:.5rem 0 .75rem}
+      .product-card .info .price small{font-size:.7rem;color:var(--text2);font-weight:300}
+      .btn-sm{padding:.45rem 1rem;font-size:.7rem}
+
+      .modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:2rem;opacity:0;transition:opacity .3s}
+      .modal-overlay.active{display:flex;opacity:1}
+      .modal{background:var(--bg2);border:1px solid var(--border);border-radius:20px;max-width:900px;width:100%;max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;transform:scale(.95) translateY(20px);transition:transform .4s cubic-bezier(.22,1,.36,1)}
+      .modal-overlay.active .modal{transform:scale(1) translateY(0)}
+      .modal .modal-img-wrap{position:relative;min-height:300px;background:var(--bg3);overflow:hidden;border-radius:20px 0 0 20px;display:flex;align-items:center;justify-content:center}
+      .modal .modal-img-wrap img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+      .modal .modal-body{padding:2.5rem;display:flex;flex-direction:column}
+      .modal .modal-body .close-btn{position:absolute;top:1rem;right:1rem;width:2rem;height:2rem;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+      .modal .modal-body .close-btn:hover{background:rgba(255,255,255,.15)}
+      .modal .modal-cat-tag{font-size:.6rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:500;margin-bottom:.5rem}
+      .modal .modal-title{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;font-weight:700;line-height:1.2;margin-bottom:.75rem}
+      .modal .modal-desc{color:var(--text2);font-size:.85rem;line-height:1.7;margin-bottom:1rem;flex:1}
+      .modal .modal-price{font-size:2rem;font-weight:700;color:var(--gold-light);font-family:'Playfair Display',serif;margin-bottom:1.5rem}
+      .modal .modal-actions{display:flex;flex-wrap:wrap;gap:.6rem}
+      .modal .modal-actions .btn{flex:1;min-width:140px;justify-content:center;padding:.7rem 1rem;font-size:.8rem}
+      .modal .modal-body{position:relative}
+
+      @media(max-width:768px){
+        .catalog-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+        .modal{grid-template-columns:1fr}
+        .modal .modal-img-wrap{min-height:200px;border-radius:20px 20px 0 0}
+        .modal .modal-body{padding:1.5rem}
+        .modal .modal-actions .btn{min-width:100%}
+      }
     </style>
   </head>
   <body>
@@ -95,7 +139,7 @@
           <span style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;letter-spacing:.02em">GOBY</span>
         </a>
         <nav style="display:flex;align-items:center;gap:2.5rem;font-size:.8rem;font-weight:400;text-transform:uppercase;letter-spacing:.12em">
-          <a href="#appliances" style="color:var(--text2);transition:color .3s" data-i18n="navAppliances" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Appareils</a>
+          <a href="#catalog" style="color:var(--text2);transition:color .3s" data-i18n="navCatalog" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Catalogue</a>
           <a href="#about" style="color:var(--text2);transition:color .3s" data-i18n="navAbout" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Maison</a>
           <a href="#contact" style="color:var(--text2);transition:color .3s" data-i18n="navContact" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Contact</a>
           <a href="https://wa.me/15147991291" target="_blank" rel="noopener" class="btn btn-gold" style="padding:.5rem 1.25rem;font-size:.7rem;text-transform:none;letter-spacing:normal" data-i18n="headerWA">WhatsApp</a>
@@ -166,45 +210,14 @@
         </div>
       </section>
 
-      <section id="appliances" class="section">
+      <section id="catalog" class="section">
         <div class="container">
-          <div class="reveal" style="text-align:center;margin-bottom:3.5rem">
-            <span class="section-label" data-i18n="appliancesLabel">La Collection</span>
-            <h2 class="section-title"><span data-i18n="appliancesTitle1">Chaque appareil,</span><br /><span data-i18n="appliancesTitle2">une œuvre de précision.</span></h2>
-            <p class="section-desc" style="margin:1rem auto 0" data-i18n="appliancesDesc">De la réfrigération à la cuisine — chaque pièce sélectionnée pour son savoir-faire, sa performance et son design intemporel.</p>
+          <div class="reveal" style="text-align:center;margin-bottom:2rem">
+            <span class="section-label" data-i18n="catalogLabel">Notre Catalogue</span>
+            <h2 class="section-title"><span data-i18n="catalogTitle1">Des appareils</span><br /><span data-i18n="catalogTitle2">pour toute la maison.</span></h2>
+            <p class="section-desc" style="margin:1rem auto 0" data-i18n="catalogDesc">Cliquez sur un produit pour voir les détails, le prix, et nous contacter directement.</p>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--border);border-radius:20px;overflow:hidden;border:1px solid var(--border)">
-            <div class="glow-card" style="border:none;border-radius:0;background:var(--bg);text-align:center;padding:3rem 2rem">
-              <div style="font-size:3rem;margin-bottom:1rem;display:inline-block;background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent">❄️</div>
-              <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;font-weight:600;margin-bottom:.5rem" data-i18n="catFridge">Réfrigération</h3>
-              <p style="font-size:.8rem;color:var(--text2);line-height:1.6" data-i18n="catFridgeDesc">French door, side-by-side, intégré. Samsung, LG, Bosch.</p>
-            </div>
-            <div class="glow-card" style="border:none;border-radius:0;background:var(--bg);text-align:center;padding:3rem 2rem">
-              <div style="font-size:3rem;margin-bottom:1rem;display:inline-block;background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent">🧺</div>
-              <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;font-weight:600;margin-bottom:.5rem" data-i18n="catLaundry">Buanderie</h3>
-              <p style="font-size:.8rem;color:var(--text2);line-height:1.6" data-i18n="catLaundryDesc">Front load, top load, ensembles superposables. Une fiabilité sans compromis.</p>
-            </div>
-            <div class="glow-card" style="border:none;border-radius:0;background:var(--bg);text-align:center;padding:3rem 2rem">
-              <div style="font-size:3rem;margin-bottom:1rem;display:inline-block;background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent">🍳</div>
-              <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;font-weight:600;margin-bottom:.5rem" data-i18n="catCooking">Cuisine</h3>
-              <p style="font-size:.8rem;color:var(--text2);line-height:1.6" data-i18n="catCookingDesc">Gaz, induction, double fuel. L'ingénierie de précision pour votre foyer.</p>
-            </div>
-            <div class="glow-card" style="border:none;border-radius:0;background:var(--bg);text-align:center;padding:3rem 2rem">
-              <div style="font-size:3rem;margin-bottom:1rem;display:inline-block;background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent">🍽️</div>
-              <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;font-weight:600;margin-bottom:.5rem" data-i18n="catDish">Vaisselle</h3>
-              <p style="font-size:.8rem;color:var(--text2);line-height:1.6" data-i18n="catDishDesc">Silencieux, efficaces, ingénierie européenne. Bosch, KitchenAid, et plus.</p>
-            </div>
-            <div class="glow-card" style="border:none;border-radius:0;background:var(--bg);text-align:center;padding:3rem 2rem">
-              <div style="font-size:3rem;margin-bottom:1rem;display:inline-block;background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent">🔥</div>
-              <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;font-weight:600;margin-bottom:.5rem" data-i18n="catMicro">Micro-ondes</h3>
-              <p style="font-size:.8rem;color:var(--text2);line-height:1.6" data-i18n="catMicroDesc">Encastré, hotte, comptoir. L'alliance de la forme et de la fonction.</p>
-            </div>
-            <div class="glow-card" style="border:none;border-radius:0;background:var(--bg);text-align:center;padding:3rem 2rem">
-              <div style="font-size:3rem;margin-bottom:1rem;display:inline-block;background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent">🧊</div>
-              <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;font-weight:600;margin-bottom:.5rem" data-i18n="catFreezer">Congélation</h3>
-              <p style="font-size:.8rem;color:var(--text2);line-height:1.6" data-i18n="catFreezerDesc">Congélateurs coffre et verticaux. Capacité supplémentaire, qualité supérieure.</p>
-            </div>
-          </div>
+          <div id="catalogGrid"></div>
         </div>
       </section>
 
@@ -300,11 +313,46 @@
       </div>
     </footer>
 
+    <div class="modal-overlay" id="productModal" onclick="if(event.target===this)closeModal()">
+      <div class="modal" role="dialog" aria-modal="true">
+        <div class="modal-img-wrap">
+          <img id="modalImg" src="" alt="" />
+        </div>
+        <div class="modal-body">
+          <button class="close-btn" onclick="closeModal()" aria-label="Close">✕</button>
+          <span class="modal-cat-tag" id="modalCat"></span>
+          <h3 class="modal-title" id="modalTitle"></h3>
+          <p class="modal-desc" id="modalDesc"></p>
+          <div class="modal-price" id="modalPrice"></div>
+          <div class="modal-actions">
+            <a class="btn btn-gold" id="modalWA" target="_blank" rel="noopener" data-i18n="modalWA">💬 WhatsApp</a>
+            <a class="btn btn-outline" id="modalEmail" data-i18n="modalEmail">✉️ Email</a>
+            <a class="btn btn-outline" id="modalCall" data-i18n="modalCall">📞 Appeler</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
+      const products = [
+        {id:'wd1',cat:'washerDryer',name:'Samsung WF53BB8900AT + DVE53BB8900TA',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Samsung+Washer+%26+Dryer',descFR:'Ensemble laveuse-sécheuse Samsung haut de gamme. Capacité de 5.3 pi³, vapeur, Wi-Fi intégré, design premium noir mat.',descEN:'Premium Samsung washer-dryer set. 5.3 cu.ft capacity, steam, built-in Wi-Fi, premium matte black design.'},
+        {id:'wd2',cat:'washerDryer',name:'LG WM4000HBA + DLEX4000B',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=LG+Washer+%26+Dryer',descFR:'Ensemble LG avec TurboWash, séchage intelligent et commandes intuitives. Efficacité énergétique certifiée.',descEN:'LG set with TurboWash, smart drying, and intuitive controls. Certified energy efficiency.'},
+        {id:'wd3',cat:'washerDryer',name:'Bosch 800 Series Washer & Dryer',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Bosch+800+Series',descFR:'Ensemble Bosch 800 Series — fabrication allemande, ultra silencieux, technologie anti-vibration, parfait pour espaces restreints.',descEN:'Bosch 800 Series set — German engineering, ultra-quiet, anti-vibration technology, perfect for tight spaces.'},
+        {id:'wd4',cat:'washerDryer',name:'Whirlpool WET4027HW + WGD4027HW',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Whirlpool+Washer+%26+Dryer',descFR:'Ensemble Whirlpool fiable avec capteurs automatiques, cycles rapides et garantie prolongée.',descEN:'Reliable Whirlpool set with automatic sensors, quick cycles, and extended warranty.'},
+        {id:'wd5',cat:'washerDryer',name:'GE GFW550SPSS + GFD550SPSS',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=GE+Washer+%26+Dryer',descFR:'Ensemble GE avec vapeur, démarrage différé et capacité familiale. Design élégant acier inoxydable.',descEN:'GE set with steam, delayed start and family capacity. Sleek stainless steel design.'},
+        {id:'wd6',cat:'washerDryer',name:'Maytag MHW6630HW + MED6630HW',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Maytag+Washer+%26+Dryer',descFR:'Ensemble Maytag commercial-grade — moteur robuste, cuve extra-large, cycle de nettoyage vapeur.',descEN:'Maytag commercial-grade set — robust motor, extra-large drum, steam cleaning cycle.'},
+        {id:'fr1',cat:'fridge',name:'Samsung RT18M6215SR',price:600,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Samsung+Refrigerator',descFR:'Réfrigérateur Samsung compact 18 pi³ — idéal pour cuisine de taille moyenne. Distributeur d\'eau et éclairage LED.',descEN:'Samsung compact 18 cu.ft refrigerator — ideal for mid-size kitchens. Water dispenser and LED lighting.'},
+        {id:'fr2',cat:'fridge',name:'LG LTCS20020S',price:750,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=LG+Refrigerator',descFR:'Réfrigérateur LG 20 pi³ — Smart Cooling, bac à légumes fraîcheur, étagères ajustables et finition acier.',descEN:'LG 20 cu.ft refrigerator — Smart Cooling, fresh vegetable crisper, adjustable shelves, steel finish.'},
+        {id:'fr3',cat:'fridge',name:'Bosch B36CL80SNS',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Bosch+Refrigerator',descFR:'Réfrigérateur Bosch encastrable 36 po — design minimaliste, refroidissement parfait, fabrication allemande.',descEN:'Bosch built-in 36" refrigerator — minimalist design, perfect cooling, German craftsmanship.'},
+        {id:'fu1',cat:'furnace',name:'Goodman GMEC96',price:750,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Goodman+Furnace',descFR:'Fournaise Goodman GMEC96 — 96% d\'efficacité, moteur à vitesse variable, silencieuse et fiable pour l\'hiver québécois.',descEN:'Goodman GMEC96 furnace — 96% efficiency, variable-speed motor, quiet and reliable for Quebec winters.'},
+        {id:'fu2',cat:'furnace',name:'Carrier 59TP6',price:800,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Carrier+Furnace',descFR:'Fournaise Carrier 59TP6 — technologie WeatherMaker, 96% AFUE, chauffage constant et confort supérieur.',descEN:'Carrier 59TP6 furnace — WeatherMaker technology, 96% AFUE, consistent heating and superior comfort.'},
+        {id:'fu3',cat:'furnace',name:'Lennox EL296E',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Lennox+Furnace',descFR:'Fournaise Lennox EL296E — 96% d\'efficacité, fonctionnement ultra silencieux, garantie 10 ans.',descEN:'Lennox EL296E furnace — 96% efficiency, ultra-quiet operation, 10-year warranty.'}
+      ];
+
       const lang = {
         fr: {
           pageTitle: 'GOBY — Électroménagers de Prestige | Montréal',
-          navAppliances: 'Appareils', navAbout: 'Maison', navContact: 'Contact',
+          navCatalog: 'Catalogue', navAbout: 'Maison', navContact: 'Contact',
           headerWA: 'WhatsApp',
           heroTag: '✦ Électroménagers de Prestige',
           heroLine1: "L'art de", heroLine2: 'bien équiper', heroLine3: 'votre maison.',
@@ -312,15 +360,12 @@
           heroCta: 'Explorer la Collection →', heroWA: '💬 WhatsApp',
           heroStat1: 'Appareils vendus', heroStat2: 'Note moyenne', heroStat3: 'Service Premium',
           brandsTitle: 'Marques d\'exception',
-          appliancesLabel: 'La Collection',
-          appliancesTitle1: 'Chaque appareil,', appliancesTitle2: 'une œuvre de précision.',
-          appliancesDesc: 'De la réfrigération à la cuisine — chaque pièce sélectionnée pour son savoir-faire, sa performance et son design intemporel.',
-          catFridge: 'Réfrigération', catFridgeDesc: 'French door, side-by-side, intégré. Samsung, LG, Bosch.',
-          catLaundry: 'Buanderie', catLaundryDesc: 'Front load, top load, ensembles superposables. Une fiabilité sans compromis.',
-          catCooking: 'Cuisine', catCookingDesc: 'Gaz, induction, double fuel. L\'ingénierie de précision pour votre foyer.',
-          catDish: 'Vaisselle', catDishDesc: 'Silencieux, efficaces, ingénierie européenne. Bosch, KitchenAid, et plus.',
-          catMicro: 'Micro-ondes', catMicroDesc: 'Encastré, hotte, comptoir. L\'alliance de la forme et de la fonction.',
-          catFreezer: 'Congélation', catFreezerDesc: 'Congélateurs coffre et verticaux. Capacité supplémentaire, qualité supérieure.',
+          catalogLabel: 'Notre Catalogue',
+          catalogTitle1: 'Des appareils', catalogTitle2: 'pour toute la maison.',
+          catalogDesc: 'Cliquez sur un produit pour voir les détails, le prix, et nous contacter directement.',
+          catWasherDryer: 'Laveuses-sécheuses', catFridge: 'Réfrigérateurs', catFurnace: 'Fournaises',
+          viewDetails: 'Voir les détails →',
+          modalWA: '💬 WhatsApp', modalEmail: '✉️ Email', modalCall: '📞 Appeler',
           aboutLabel: 'Notre Maison', aboutTitle: 'Où la qualité rencontre la confiance.',
           aboutDesc: 'Fondé à Montréal, GOBY repose sur une conviction simple : chaque maison mérite des appareils exceptionnels et un service à la hauteur. Nous inspectons personnellement chaque unité — neuve ou pré-appartenance — parce que votre cuisine ne devrait jamais faire de compromis.',
           aboutFeat1: 'Livraison offerte', aboutFeat2: 'Installation pro', aboutFeat3: 'Inspecté & certifié', aboutFeat4: 'Support après-vente',
@@ -342,7 +387,7 @@
         },
         en: {
           pageTitle: 'GOBY — Premium Appliances | Montreal',
-          navAppliances: 'Appliances', navAbout: 'About', navContact: 'Contact',
+          navCatalog: 'Catalog', navAbout: 'About', navContact: 'Contact',
           headerWA: 'WhatsApp',
           heroTag: '✦ Premium Appliances',
           heroLine1: 'The art of', heroLine2: 'equipping', heroLine3: 'your home.',
@@ -350,15 +395,12 @@
           heroCta: 'Explore the Collection →', heroWA: '💬 WhatsApp',
           heroStat1: 'Appliances Sold', heroStat2: 'Average Rating', heroStat3: 'Premium Service',
           brandsTitle: 'Exceptional Brands',
-          appliancesLabel: 'The Collection',
-          appliancesTitle1: 'Every appliance,', appliancesTitle2: 'a work of precision.',
-          appliancesDesc: 'From refrigeration to cooking — each piece selected for its craftsmanship, performance, and timeless design.',
-          catFridge: 'Refrigeration', catFridgeDesc: 'French door, side-by-side, integrated. Samsung, LG, Bosch.',
-          catLaundry: 'Laundry', catLaundryDesc: 'Front load, top load, stackable sets. Reliability without compromise.',
-          catCooking: 'Cooking', catCookingDesc: 'Gas, induction, dual-fuel. Precision engineering for your home.',
-          catDish: 'Dishwashing', catDishDesc: 'Quiet, efficient, European engineering. Bosch, KitchenAid, and more.',
-          catMicro: 'Microwaves', catMicroDesc: 'Built-in, over-the-range, countertop. Form meets function.',
-          catFreezer: 'Freezing', catFreezerDesc: 'Chest & upright freezers. Extra capacity, premium quality.',
+          catalogLabel: 'Our Catalog',
+          catalogTitle1: 'Appliances', catalogTitle2: 'for every room.',
+          catalogDesc: 'Click a product to view details, pricing, and contact options.',
+          catWasherDryer: 'Washer & Dryer Sets', catFridge: 'Refrigerators', catFurnace: 'Furnaces',
+          viewDetails: 'View Details →',
+          modalWA: '💬 WhatsApp', modalEmail: '✉️ Email', modalCall: '📞 Call',
           aboutLabel: 'Our House', aboutTitle: 'Where quality meets trust.',
           aboutDesc: 'Founded in Montreal, GOBY is built on a simple belief: every home deserves exceptional appliances and every customer deserves exceptional care. We personally inspect every unit — new or pre-owned — because your kitchen shouldn\'t settle for less.',
           aboutFeat1: 'Free Delivery', aboutFeat2: 'Pro Installation', aboutFeat3: 'Inspected & Certified', aboutFeat4: 'After-Sales Support',
@@ -422,6 +464,72 @@
       }, { threshold: .5 });
       counters.forEach(el => counterObserver.observe(el));
 
+      const categoryMeta = {
+        washerDryer: {icon:'🧺', key:'catWasherDryer'},
+        fridge: {icon:'❄️', key:'catFridge'},
+        furnace: {icon:'🔥', key:'catFurnace'}
+      };
+
+      function waMsg(p, lang){
+        const msgs = {
+          washerDryer: {fr:"Bonjour, j'aimerais en savoir plus sur cet ensemble laveuse-sécheuse", en:"Hello, I'd like to know more about this washer-dryer set"},
+          fridge: {fr:"Bonjour, j'aimerais en savoir plus sur ce réfrigérateur", en:"Hello, I'd like to know more about this refrigerator"},
+          furnace: {fr:"Bonjour, j'aimerais en savoir plus sur cette fournaise", en:"Hello, I'd like to know more about this furnace"}
+        };
+        const base = msgs[p.cat]?.[lang] || msgs[p.cat]?.fr;
+        return encodeURIComponent(base + ' : ' + p.name);
+      }
+
+      function renderCatalog(){
+        const grid = document.getElementById('catalogGrid');
+        const cats = ['washerDryer','fridge','furnace'];
+        let html = '';
+        cats.forEach(cat => {
+          const items = products.filter(p => p.cat === cat);
+          const meta = categoryMeta[cat];
+          html += '<div class="cat-header reveal"><span>' + meta.icon + '</span><h3 data-i18n="' + meta.key + '">' + meta.key + '</h3><div class="line"></div></div>';
+          html += '<div class="catalog-grid">';
+          items.forEach(p => {
+            html += '<div class="product-card reveal" onclick="openModal(\'' + p.id + '\')">' +
+              '<div class="img-wrap"><img src="' + p.img + '" alt="' + p.name + '" loading="lazy" /></div>' +
+              '<div class="info"><span class="cat-tag" data-i18n="' + meta.key + '">' + meta.key + '</span>' +
+              '<h4>' + p.name + '</h4>' +
+              '<div class="price">$' + p.price + ' <small>CAD</small></div>' +
+              '<button class="btn btn-gold btn-sm" data-i18n="viewDetails">Voir les détails →</button></div></div>';
+          });
+          html += '</div>';
+        });
+        grid.innerHTML = html;
+        setTimeout(() => {
+          grid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }, 100);
+      }
+
+      function openModal(id){
+        const p = products.find(x => x.id === id);
+        if(!p) return;
+        const l = document.documentElement.lang;
+        document.getElementById('modalImg').src = p.img;
+        document.getElementById('modalImg').alt = p.name;
+        document.getElementById('modalCat').textContent = categoryMeta[p.cat].icon + ' ' + (lang[l]?.[categoryMeta[p.cat].key] || lang.fr[categoryMeta[p.cat].key]);
+        document.getElementById('modalTitle').textContent = p.name;
+        document.getElementById('modalDesc').textContent = l === 'en' ? p.descEN : p.descFR;
+        document.getElementById('modalPrice').textContent = '$' + p.price + ' CAD';
+        document.getElementById('modalWA').href = 'https://wa.me/15147991291?text=' + waMsg(p, l);
+        document.getElementById('modalEmail').href = 'mailto:business.ab.bis@gmail.com?subject=' + encodeURIComponent('Question about ' + p.name);
+        document.getElementById('modalCall').href = 'tel:+15147991291';
+        const overlay = document.getElementById('productModal');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal(){
+        document.getElementById('productModal').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
       const waBubble = document.getElementById('waBubble');
       const waClose = document.getElementById('waClose');
       let waTimer, waDismissed = false;
@@ -450,6 +558,7 @@
       });
 
       setTimeout(showWABubble, 4000);
+      renderCatalog();
 
       document.querySelector('form').addEventListener('submit', function(e){
         const raw = document.getElementById('contactInput').value.replace(/[\s\-\+\(\)\.]/g, '');
