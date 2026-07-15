@@ -134,17 +134,20 @@
       .guide-overlay.active{display:block;animation:fadePage .3s ease}
       @keyframes fadePage{0%{opacity:0}100%{opacity:1}}
       .guide-back{display:inline-flex;align-items:center;gap:.5rem;color:var(--text2);font-size:.8rem;cursor:pointer;background:none;border:none;font-family:inherit;transition:color .3s;margin-bottom:1rem;padding:.5rem 0}
+      .guide-content h3,.legal-content h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:#fff;font-weight:600;margin-bottom:1rem}
+      .guide-content h4,.legal-content h4{font-size:.9rem;color:var(--gold);font-weight:500;margin:1.25rem 0 .5rem}
+      .guide-content p,.legal-content p{color:var(--text2);font-size:.85rem;line-height:1.7;margin-bottom:.75rem}
+      .guide-content ul,.legal-content ul{padding-left:1.25rem;margin-bottom:1rem}
       .guide-back:hover{color:var(--gold)}
       .guide-back .arrow{font-size:1.1rem;line-height:1}
       .guide-nav{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
       .guide-nav a{padding:.5rem 1rem;border-radius:8px;font-size:.8rem;color:var(--text2);border:1px solid var(--border);transition:all .3s;cursor:pointer}
       .guide-nav a:hover,.guide-nav a.active{color:var(--gold);border-color:var(--gold);background:rgba(201,149,42,.05)}
-      .guide-content h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:#fff;font-weight:600;margin-bottom:1rem}
-      .guide-content h4{font-size:.9rem;color:var(--gold);font-weight:500;margin:1.25rem 0 .5rem}
-      .guide-content p{color:var(--text2);font-size:.85rem;line-height:1.7;margin-bottom:.75rem}
-      .guide-content ul{padding-left:1.25rem;margin-bottom:1rem}
       .guide-content ul li{color:var(--text2);font-size:.85rem;line-height:1.7;margin-bottom:.35rem;list-style:disc}
       .guide-content ul li strong{color:#fff;font-weight:500}
+      #legalContent h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:#fff;font-weight:600;margin-bottom:1rem}
+      #legalContent h4{font-size:.9rem;color:var(--gold);font-weight:500;margin:1.25rem 0 .5rem}
+      #legalContent p{color:var(--text2);font-size:.85rem;line-height:1.7;margin-bottom:.75rem}
 
       @media(max-width:768px){
         .catalog-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
@@ -410,6 +413,13 @@
           </div>
         </div>
       </div>
+
+      <div id="legalSection" class="guide-overlay">
+        <div class="container">
+          <button class="guide-back" onclick="closeLegal()"><span class="arrow">←</span> <span data-i18n="guideBack">Retour au site</span></button>
+          <div id="legalContent"></div>
+        </div>
+      </div>
     </main>
 
     <div id="waPopup" style="position:fixed;bottom:2rem;right:2rem;z-index:99;display:flex;flex-direction:column;align-items:flex-end;gap:.75rem">
@@ -431,7 +441,11 @@
           <span style="font-family:'Playfair Display',serif;font-size:.95rem;color:#fff">GOBY</span>
         </div>
         <p style="font-size:.75rem;color:var(--text2);letter-spacing:.05em" data-i18n="footerCopy">© MMXXVI - GOBY Montréal</p>
-        <div style="display:flex;gap:1.5rem;font-size:.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:.1em">
+        <div style="display:flex;gap:1rem;font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;flex-wrap:wrap;justify-content:center">
+          <a href="terms.html" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerTerms">Conditions</a>
+          <a href="privacy.html" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerPrivacy">Confidentialite</a>
+          <a href="returns.html" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerReturns">Retours & Garantie</a>
+          <span style="opacity:.3">|</span>
           <a href="https://www.facebook.com/gobysolutions" target="_blank" rel="noopener" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Facebook</a>
           <a href="https://wa.me/15147991291" target="_blank" rel="noopener" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">WhatsApp</a>
         </div>
@@ -539,6 +553,7 @@
           gFurnaceH3: '3. Compatibilite', gFurnaceP3: 'Verifiez le type de combustible (gaz, electrique, propane), la taille de votre conduite et les normes d\'evacuation.',
           gFurnaceH4: '4. Budget', gFurnaceP4: '750-1000 $ pour un modele standard 80% AFUE. 1000-1500 $ pour un modele 96% AFUE. 1500-2500 $ pour le haut de gamme.',
           waPopupText: '💬 Une question ? Envoyez-nous un message sur WhatsApp !',
+          footerTerms: 'Conditions', footerPrivacy: 'Confidentialite', footerReturns: 'Retours & Garantie',
           footerCopy: '© MMXXVI - GOBY Montréal'
         },
         en: {
@@ -605,6 +620,7 @@
           gFurnaceH3: '3. Compatibility', gFurnaceP3: 'Check fuel type (gas, electric, propane), duct size, and venting requirements. Have a professional inspect before buying.',
           gFurnaceH4: '4. Budget', gFurnaceP4: '$750-1000 for a standard 80% AFUE model. $1000-1500 for a 96% AFUE model. $1500-2500 for premium variable-speed.',
           waPopupText: '💬 Got a question? Send us a message on WhatsApp!',
+          footerTerms: 'Terms', footerPrivacy: 'Privacy', footerReturns: 'Returns & Warranty',
           footerCopy: '© MMXXVI - GOBY Montreal'
         }
       };
@@ -716,7 +732,7 @@
       }
 
       document.addEventListener('keydown', e => {
-        if(e.key === 'Escape'){ closeModal(); closeGuide(); }
+        if(e.key === 'Escape'){ closeModal(); closeGuide(); closeLegal(); }
       });
 
       function toggleFAQ(btn){
@@ -745,6 +761,37 @@
         document.body.style.overflow = '';
       }
 
+      const legalContent = {
+        terms: {
+          fr: '<h3>Conditions d\'utilisation</h3><p>En accedant au site GOBY, vous acceptez les presentes conditions. Tous les produits sont offerts sous reserve de disponibilite. Les prix peuvent etre modifies sans preavis.</p><h4>1. Utilisation du site</h4><p>Vous vous engagez a utiliser ce site uniquement a des fins personnelles et legitimes. Toute utilisation commerciale non autorisee est interdite.</p><h4>2. Propriete intellectuelle</h4><p>Tout le contenu du site (textes, images, logos) est la propriete de GOBY et ne peut etre reproduit sans autorisation ecrite.</p><h4>3. Limitation de responsabilite</h4><p>GOBY ne saurait etre tenu responsable des dommages indirects decoulant de l\'utilisation du site ou des produits achetes.</p>',
+          en: '<h3>Terms of Service</h3><p>By accessing the GOBY website, you agree to these terms. All products are offered subject to availability. Prices may change without notice.</p><h4>1. Site Use</h4><p>You agree to use this site for personal and legitimate purposes only. Unauthorized commercial use is prohibited.</p><h4>2. Intellectual Property</h4><p>All site content (text, images, logos) is the property of GOBY and may not be reproduced without written permission.</p><h4>3. Limitation of Liability</h4><p>GOBY shall not be liable for indirect damages arising from the use of the site or purchased products.</p>'
+        },
+        privacy: {
+          fr: '<h3>Politique de confidentialite</h3><p>GOBY s\'engage a proteger vos renseignements personnels. Cette politique explique comment nous collectons, utilisons et protegeons vos donnees.</p><h4>1. Collecte des donnees</h4><p>Nous collectons uniquement les informations necessaires au traitement de vos commandes : nom, adresse, courriel et numero de telephone.</p><h4>2. Utilisation des donnees</h4><p>Vos informations sont utilisees pour le traitement des commandes, la livraison et le service a la clientele. Nous ne vendons jamais vos donnees a des tiers.</p><h4>3. Securite</h4><p>Nous utilisons des mesures de securite conformes aux normes de l\'industrie pour proteger vos donnees contre tout acces non autorise.</p><h4>4. Contact</h4><p>Pour toute question concernant vos donnees, contactez-nous a business.ab.bis@gmail.com.</p>',
+          en: '<h3>Privacy Policy</h3><p>GOBY is committed to protecting your personal information. This policy explains how we collect, use and protect your data.</p><h4>1. Data Collection</h4><p>We collect only the information needed to process your orders: name, address, email and phone number.</p><h4>2. Data Use</h4><p>Your information is used for order processing, delivery and customer service. We never sell your data to third parties.</p><h4>3. Security</h4><p>We use industry-standard security measures to protect your data from unauthorized access.</p><h4>4. Contact</h4><p>For any questions about your data, contact us at business.ab.bis@gmail.com.</p>'
+        },
+        returns: {
+          fr: '<h3>Politique de retours et garantie</h3><p>Nous voulons que vous soyez entierement satisfait de votre achat. Voici notre politique de retours et de garantie.</p><h4>Retours</h4><p>Vous disposez de 30 jours suivant la reception pour retourner un appareil en bon etat. L\'appareil doit etre dans son emballage d\'origine avec tous les accessoires. Des frais de restockage de 15% peuvent s\'appliquer.</p><h4>Garantie appareils neufs</h4><p>Tous nos appareils neufs sont couverts par la garantie du fabricant, d\'une duree de 1 a 5 ans selon la marque et le modele.</p><h4>Garantie appareils certifies</h4><p>Nos appareils certifies pre-appartenance incluent une garantie GOBY de 90 jours couvrant les defauts de fonctionnement. Extensible a 1 an sur demande.</p><h4>Livraison et installation</h4><p>En cas de probleme de livraison ou d\'installation, contactez-nous dans les 48 heures. Nous ferons tout notre possible pour resoudre la situation rapidement.</p>',
+          en: '<h3>Returns & Warranty Policy</h3><p>We want you to be fully satisfied with your purchase. Here is our returns and warranty policy.</p><h4>Returns</h4><p>You have 30 days from receipt to return an appliance in good condition. The appliance must be in its original packaging with all accessories. A 15% restocking fee may apply.</p><h4>New Appliance Warranty</h4><p>All new appliances are covered by the manufacturer\'s warranty, ranging from 1 to 5 years depending on brand and model.</p><h4>Certified Appliance Warranty</h4><p>Our certified pre-owned appliances include a 90-day GOBY warranty covering functional defects. Extendable to 1 year on request.</p><h4>Delivery & Installation</h4><p>If you experience any delivery or installation issues, contact us within 48 hours. We will do our best to resolve the situation quickly.</p>'
+        }
+      };
+
+      function openLegal(page){
+        const overlay = document.getElementById('legalSection');
+        const l = document.documentElement.lang;
+        const data = legalContent[page];
+        if(!data) return;
+        document.getElementById('legalContent').innerHTML = data[l] || data.fr;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        overlay.scrollTop = 0;
+      }
+
+      function closeLegal(){
+        document.getElementById('legalSection').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
       (function initFakePages(){
         document.addEventListener('click', function(e){
           const a = e.target.closest('a[href$=".html"]');
@@ -755,6 +802,11 @@
             e.preventDefault();
             if(page === 'guide') showGuide('overview');
             else showGuide(page.split('-')[1]);
+          }
+          const legalPages = ['terms','privacy','returns'];
+          if(legalPages.includes(page)){
+            e.preventDefault();
+            openLegal(page);
           }
         });
       })();
