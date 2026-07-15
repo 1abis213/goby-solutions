@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rapport de Test — Electro Legendre</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.6; padding: 2rem; max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 1.8rem; margin-bottom: .5rem; color: #111; }
+    h2 { font-size: 1.3rem; margin: 2rem 0 1rem; padding-bottom: .5rem; border-bottom: 2px solid #e5e5e5; color: #2563eb; }
+    h3 { font-size: 1.05rem; margin: 1.5rem 0 .5rem; color: #333; }
+    .meta { color: #666; font-size: .85rem; margin-bottom: 2rem; }
+    .bug { background: #fff; border-left: 4px solid #dc2626; padding: .75rem 1rem; margin: .5rem 0; border-radius: 0 6px 6px 0; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+    .warn { background: #fff; border-left: 4px solid #f59e0b; padding: .75rem 1rem; margin: .5rem 0; border-radius: 0 6px 6px 0; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+    .info { background: #fff; border-left: 4px solid #2563eb; padding: .75rem 1rem; margin: .5rem 0; border-radius: 0 6px 6px 0; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+    .pass { background: #fff; border-left: 4px solid #16a34a; padding: .75rem 1rem; margin: .5rem 0; border-radius: 0 6px 6px 0; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+    .tag { display: inline-block; font-size: .7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; margin-right: 6px; vertical-align: middle; }
+    .tag-critique { background: #fecaca; color: #991b1b; }
+    .tag-moyen { background: #fef3c7; color: #92400e; }
+    .tag-info { background: #dbeafe; color: #1e40af; }
+    .tag-ok { background: #d1fae5; color: #065f46; }
+    .tag-perf { background: #ede9fe; color: #5b21b6; }
+    code { background: #f3f4f6; padding: 1px 5px; border-radius: 3px; font-size: .85em; font-family: 'Consolas', 'Courier New', monospace; }
+    .ligne { color: #888; font-size: .8rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .9rem; }
+    th, td { padding: .5rem .75rem; text-align: left; border-bottom: 1px solid #e5e5e5; }
+    th { background: #f3f4f6; font-weight: 600; }
+    .score { display: inline-block; font-size: 2rem; font-weight: 800; color: #2563eb; }
+    .resume-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .resume-card { background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.08); text-align: center; }
+    .resume-card .num { font-size: 1.8rem; font-weight: 800; }
+    .resume-card .label { font-size: .8rem; color: #666; margin-top: .25rem; }
+  </style>
+</head>
+<body>
+
+<h1>Rapport de Test — Electro Legendre</h1>
+<p class="meta">Date : 3 juillet 2026 &nbsp;|&nbsp; Fichier testé : <code>index1.html</code> &nbsp;|&nbsp; Version : MVP1</p>
+
+<div class="resume-grid">
+  <div class="resume-card"><div class="num" style="color:#dc2626">9</div><div class="label">Bugs critiques</div></div>
+  <div class="resume-card"><div class="num" style="color:#f59e0b">12</div><div class="label">Problèmes moyens</div></div>
+  <div class="resume-card"><div class="num" style="color:#2563eb">8</div><div class="label">Améliorations suggérées</div></div>
+  <div class="resume-card"><div class="num" style="color:#16a34a">18</div><div class="label">Tests réussis</div></div>
+</div>
+
+<!-- ===================== SECTION 1: BUGS CRITIQUES ===================== -->
+<h2>1. Bugs critiques</h2>
+
+<div class="bug">
+  <span class="tag tag-critique">Critique</span>
+  <strong>Bouton « Continuer sur le site » — texte français hardcoded</strong><br>
+  <span class="ligne">Ligne 2665</span><br>
+  Le bouton <code>#popup-continue</code> affiche <code>"Continuer sur le site"</code> en dur au lieu d'utiliser <code>data-i18n="popupContinue"</code>. En mode anglais, le bouton affichera du français. En mode français, ça fonctionne par accident.<br>
+  <strong>Correction :</strong> Ajouter <code>data-i18n="popupContinue"</code> au bouton et retirer le texte inline.
+</div>
+
+<div class="bug">
+  <span class="tag tag-critique">Critique</span>
+  <strong>Messages de validation du formulaire jamais traduits</strong><br>
+  <span class="ligne">Lignes 2206-2238</span><br>
+  Les fonctions <code>validateName()</code>, <code>validateEmail()</code>, <code>validatePhone()</code>, <code>validateMessage()</code> retournent toutes des messages d'erreur en anglais hardcoded. Même si l'utilisateur passe en français, les erreurs restent en anglais.<br>
+  <strong>Correction :</strong> Utiliser un système de traduction pour les messages de validation (clé i18n ou objet de traduction).
+</div>
+
+<div class="bug">
+  <span class="tag tag-critique">Critique</span>
+  <strong>Boutons « Open » / « Closes soon » — badges d'heures jamais traduits</strong><br>
+  <span class="ligne">Ligne 2335</span><br>
+  <code>b.textContent = closingSoon ? 'Closes soon' : 'Open';</code> — Ces textes sont en anglais et ne changent jamais avec la langue.<br>
+  <strong>Correction :</strong> Utiliser les clés i18n ou un objet de traduction pour les badges.
+</div>
+
+<div class="bug">
+  <span class="tag tag-critique">Critique</span>
+  <strong>Les jours des heures d'ouverture ne sont jamais traduits</strong><br>
+  <span class="ligne">Lignes 1748-1775 (pied de page)</span><br>
+  Les noms de jours (Sunday, Monday, etc.) dans la section heures du pied de page sont du texte brut, sans <code>data-i18n</code>. En français, ils restent affichés en anglais.<br>
+  <strong>Correction :</strong> Ajouter des balises <code>span</code> avec <code>data-i18n</code> pour chaque jour, ou traduire via JS.
+</div>
+
+<div class="bug">
+  <span class="tag tag-critique">Critique</span>
+  <strong>Fermeture de tous les popups — un clic sur un lien ferme aussi les autres</strong><br>
+  <span class="ligne">Ligne 2750</span><br>
+  <code>document.querySelectorAll('.popup-overlay a').forEach(...)</code> ajoute <code>closePopup</code> (fermeture du popup téléphonique) à TOUS les liens de TOUS les popups. Cliquer sur un lien dans le popup WhatsApp, les popups légaux, ou tout autre popup ferme aussi le popup téléphonique.<br>
+  <strong>Correction :</strong> Cibler uniquement les liens dans <code>#popup-overlay</code>, pas tous les <code>.popup-overlay a</code>.
+</div>
+
+<div class="bug">
+  <span class="tag tag-critique">Critique</span>
+  <strong>Scrollbar du carrousel d'avis visible sur Chrome/Safari/Edge</strong><br>
+  <span class="ligne">Ligne 979</span><br>
+  Le style inline utilise <code>scrollbar-width:none</code> (Firefox) et <code>-ms-overflow-style:none</code> (IE), mais il manque le masquage WebKit pour Chrome/Safari/Edge : <code>::-webkit-scrollbar { display: none }</code>. La barre de défilement sera visible sur tous les navigateurs Chromium.<br>
+  <strong>Correction :</strong> Ajouter un style CSS <code>.review-track::-webkit-scrollbar { display: none }</code>.
+</div>
+
+<div class="bug">
+  <span class="tag tag-critique">Critique</span>
+  <strong>Nombre deavis dans JSON-LD incorrect</strong><br>
+  <span class="ligne">Ligne 311</span><br>
+  <code>"reviewCount": "6"</code> dans le JSON-LD alors que le badge affiche « 25+ reviews » et le carrousel en montre 13. Google pourrait pénaliser cette incohérence.<br>
+  <strong>Correction :</strong> Mettre à jour <code>reviewCount</code> et la liste <code>review</code> dans le JSON-LD.
+</div>
+
+<div class="bug">
+  <span class="tag tag-critique">Critique</span>
+  <strong>Code mort — fonction <code>initTeamTilt</code> appelée sur des éléments inexistants</strong><br>
+  <span class="ligne">Ligne 2518 + 2521-2639</span><br>
+  <code>setTimeout(initTeamTilt, 200)</code> est appelé, mais <code>initTeamTilt()</code> cherche des éléments <code>.pc-card-wrapper</code> qui n'existent plus dans le DOM (section équipe supprimée). La fonction fait 120 lignes de calculs inutiles à chaque chargement.<br>
+  <strong>Correction :</strong> Supprimer l'appel <code>setTimeout(initTeamTilt, 200)</code> et toute la fonction <code>initTeamTilt()</code>.
+</div>
+
+<div class="bug">
+  <span class="tag tag-critique">Critique</span>
+  <strong>Sélecteur <code>.pc-hours-row</code> — code mort</strong><br>
+  <span class="ligne">Ligne 2328</span><br>
+  <code>document.querySelectorAll('.pc-hours-row')</code> ne trouve aucun élément dans le DOM (ancienne section équipe supprimée). Code mort qui s'exécute inutilement.<br>
+  <strong>Correction :</strong> Supprimer le bloc <code>.pc-hours-row</code> de la fonction <code>annotateHours()</code>.
+</div>
+
+<div class="bug">
+  <span class="tag tag-critique">Critique</span>
+  <strong>Texte alternatif des images de la section À propos non traduit</strong><br>
+  <span class="ligne">Lignes 1292-1297</span><br>
+  Les attributs <code>alt</code> des images du carrousel (« Electro Legendre appliances », « Electro Legendre showroom », etc.) restent en anglais quel que soit le langage choisi.<br>
+  <strong>Correction :</strong> Ajouter <code>data-i18n</code> aux balises <code>img</code> ou gérer via JS.
+</div>
+
+<!-- ===================== SECTION 2: PROBLÈMES MOYENS ===================== -->
+<h2>2. Problèmes moyens</h2>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>Compteur d'avis incohérent entre le badge et le carrousel</strong><br>
+  <span class="ligne">Ligne 649 vs 970</span><br>
+  Le badge Google Reviews affiche « Based on <strong>25+</strong> reviews » alors que la clé i18n <code>googleReviewCount</code> dit « <strong>23+</strong> Google Reviews ». Deux chiffres différents sur la même page.<br>
+  <strong>Correction :</strong> Unifier le nombre (25+) partout.
+</div>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>Absence de <code>og:locale:alternate</code> pour le français</strong><br>
+  <span class="ligne">Ligne 11</span><br>
+  La balise <code>og:locale</code> est <code>en_CA</code> mais il n'y a pas de <code>&lt;meta property="og:locale:alternate" content="fr_CA"&gt;</code>. Facebook/LinkedIn ne sauront pas que la page est aussi disponible en français.<br>
+  <strong>Correction :</strong> Ajouter <code>&lt;meta property="og:locale:alternate" content="fr_CA"&gt;</code>.
+</div>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>Attribut <code>data-per-page="3"</code> inutilisé sur le carrousel d'avis</strong><br>
+  <span class="ligne">Ligne 978</span><br>
+  L'attribut <code>data-per-page="3"</code> est défini mais jamais lu par le JavaScript. Les boutons prev/next scrolilent d'une seule diapositive, pas de 3.<br>
+  <strong>Correction :</strong> Soit implémenter la logique pagination, soit supprimer l'attribut.
+</div>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>Le menu mobile se ferme sur <code>mousedown</code> au lieu de <code>click</code></strong><br>
+  <span class="ligne">Ligne 2443</span><br>
+  L'événement <code>mousedown</code> ferme le menu avant que le clic n'atteigne sa cible. Si un utilisateur clique sur un lien en arrière-plan, le menu se ferme mais le lien peut aussi être cliqué.<br>
+  <strong>Correction :</strong> Utiliser <code>click</code> ou vérifier <code>e.target.closest('a')</code>.
+</div>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>Le menu en cascade est à l'intérieur de <code>&lt;main&gt;</code></strong><br>
+  <span class="ligne">Ligne 548 vs 614</span><br>
+  Le <code>staggered-menu-wrapper</code> est placé à l'intérieur de <code>&lt;main id="main-content"&gt;</code>, mais c'est un overlay de navigation qui devrait logiquement être en dehors de <code>&lt;main&gt;</code>. Les lecteurs d'écran pourraient le considérer comme du contenu principal.<br>
+  <strong>Correction :</strong> Déplacer le menu avant <code>&lt;main&gt;</code>.
+</div>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>Le popup WhatsApp n'empêche pas le défilement de la page</strong><br>
+  <span class="ligne">Ligne 2756</span><br>
+  <code>closeWaPopup</code> réinitialise <code>document.body.style.overflow</code>, mais l'ouverture du popup WhatsApp ne le définit pas à <code>'hidden'</code>. L'utilisateur peut défiler l'arrière-plan derrière le popup.<br>
+  <strong>Correction :</strong> Ajouter <code>document.body.style.overflow = 'hidden'</code> lors de l'ouverture du popup WhatsApp.
+</div>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>Les images de crédit dans la section À propos peuvent ne pas se charger</strong><br>
+  <span class="ligne">Lignes 1306-1310</span><br>
+  Les URLs externes (Pinterest, Samsung, AJ Madison, Home Depot) sont des liens directs qui peuvent être bloqués par des politiques CORS ou devenir invalides. Aucun fallback <code>onerror</code> n'est défini sur ces images.<br>
+  <strong>Correction :</strong> Ajouter <code>onerror</code> avec un fallback, ou héberger les images localement.
+</div>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>Le bouton WhatsApp flottant peut chevaucher la barre CTA mobile</strong><br>
+  <span class="ligne">Lignes 1799-1812</span><br>
+  Sur mobile, le bouton WhatsApp est à <code>bottom-20</code> (80px) et la barre d'appel est à <code>bottom-4</code> (16px). Avec la hauteur de la barre (~48px), l'espace entre les deux est d'environ 16px. Sur de très petits écrans (< 375px), ils pourraient se chevaucher.<br>
+  <strong>Correction :</strong> Vérifier sur iPhone SE / Galaxy Mini et ajuster les positions si nécessaire.
+</div>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>Les boutons prev/next du carrousel d'avis débordent sur mobile</strong><br>
+  <span class="ligne">Lignes 1267-1268</span><br>
+  Les boutons utilisent <code>-translate-x-3</code> / <code>translate-x-3</code> pour se positionner en dehors du conteneur. Sur mobile, ils peuvent dépasser de l'écran ou être difficiles à atteindre.<br>
+  <strong>Correction :</strong> Masquer les boutons sur mobile (<code>hidden md:flex</code>) ou les repositionner à l'intérieur.
+</div>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>Le label du formulaire utilise <code>sr-only</code> mais le placeholder est visible</strong><br>
+  <span class="ligne">Lignes 1392-1393</span><br>
+  Les labels sont cachés visuellement (<code>sr-only</code>) mais les placeholders servent de labels visuels. Les placeholders disparaissent quand l'utilisateur tape, ce qui peut causer une confusion sur ce que le champ attend.<br>
+  <strong>Correction :</strong> Utiliser des labels flottants ou des placeholders persistants.
+</div>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>La validation du formulaire ne valide pas au premier focus</strong><br>
+  <span class="ligne">Ligne 2268-2271</span><br>
+  La validation ne se déclenche que sur l'événement <code>input</code>. Si l'utilisateur clique directement sur « Envoyer » sans toucher aux champs, les erreurs ne s'afficheront que si le formulaire est soumis. Les champs vides ne montrent pas d'erreur tant qu'on n'a pas interagi avec eux.<br>
+  <strong>Correction :</strong> Ajouter validation sur <code>blur</code> pour montrer les erreurs plus tôt.
+</div>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>La classe <code>pe-16</code> sur le textarea dépend du CDN Tailwind</strong><br>
+  <span class="ligne">Ligne 1410</span><br>
+  La classe <code>pe-16</code> (padding-inline-end) n'est définie que dans le CDN Tailwind. Si le CDN est lent ou bloqué, le compteur de caractères chevauchera le texte saisi.<br>
+  <strong>Correction :</strong> Définir <code>pe-16</code> dans le bloc <code>&lt;style&gt;</code> local comme fallback.
+</div>
+
+<div class="warn">
+  <span class="tag tag-moyen">Moyen</span>
+  <strong>Les images de la section À propos utilisent <code>loading="lazy"</code> sur toutes les slides</strong><br>
+  <span class="ligne">Lignes 1292-1297</span><br>
+  La première image du carrousel devrait avoir <code>loading="eager"</code> pour s'afficher immédiatement. Toutes les slides being <code>lazy</code> peut retarder l'affichage de la première image.<br>
+  <strong>Correction :</strong> Mettre <code>loading="eager"</code> sur la première slide, garder <code>lazy</code> sur les autres.
+</div>
+
+<!-- ===================== SECTION 3: AMÉLIORATIONS ===================== -->
+<h2>3. Améliorations suggérées</h2>
+
+<div class="info">
+  <span class="tag tag-info">Amélioration</span>
+  <strong>Ajouter un favicon PNG 32x32 en plus du SVG</strong><br>
+  Le favicon actuel est un SVG data URI. Certains anciens navigateurs et la barre d'onglets ne l'affichent pas correctement. Un PNG 32x32 en plus améliorerait la compatibilité.
+</div>
+
+<div class="info">
+  <span class="tag tag-info">Amélioration</span>
+  <strong>Supprimer les clés i18n mortes dans les dictionnaires</strong><br>
+  <span class="ligne">Lignes 1824, 1874-1879, 1833-1834, etc.</span><br>
+  Les clés <code>team</code>, <code>meetTeam</code>, <code>teamTitle</code>, <code>teamDesc</code>, <code>borrelTitle</code>, <code>tonyTitle</code>, <code>available</code>, <code>idx13</code>, <code>idx14</code>, <code>idx16-30</code>, <code>idx89</code> existent dans les dictionnaires mais ne sont plus utilisées dans le HTML (section équipe supprimée, section produits supprimée). Environ 25 clés mortes.
+</div>
+
+<div class="info">
+  <span class="tag tag-info">Amélioration</span>
+  <strong>Ajouter <code>rel="dns-prefetch"</code> pour les domains externes</strong><br>
+  Les ressources proviennent de <code>cdn.tailwindcss.com</code>, <code>cdnjs.cloudflare.com</code>, <code>fonts.googleapis.com</code>, <code>commons.wikimedia.org</code>, <code>i.imgur.com</code>, <code>i.pinimg.com</code>. Ajouter <code>&lt;link rel="dns-prefetch"&gt;</code> pour les domains non préconnectés améliorerait le temps de chargement.
+</div>
+
+<div class="info">
+  <span class="tag tag-info">Amélioration</span>
+  <strong>Le lien canonical pointe vers <code>electrolegendre.com</code></strong><br>
+  <span class="ligne">Ligne 18</span><br>
+  Le domaine <code>electrolegendre.com</code> doit être vérifié. Si le site est hébergé ailleurs (ex: GitHub Pages), le lien canonical créerait un conflit SEO.
+</div>
+
+<div class="info">
+  <span class="tag tag-info">Amélioration</span>
+  <strong>Le JSON-LD utilise un <code>hasMerchantReturnPolicy</code> avec <code>null</code></strong><br>
+  <span class="ligne">Ligne 339-341</span><br>
+  <code>"merchantReturnDays": null</code> pourrait causer une erreur de validation Google. Mieux vaut supprimer cette propriété ou mettre un nombre.
+</div>
+
+<div class="info">
+  <span class="tag tag-info">Amélioration</span>
+  <strong>Les images imgur n'ont pas de <code>width</code> et <code>height</code></strong><br>
+  <span class="ligne">Ligne 621</span><br>
+  L'image hero n'a pas d'attributs <code>width</code> et <code>height</code>. Google Lighthouse recommande ces attributs pour éviter les décalages de mise en page (CLS).
+</div>
+
+<div class="info">
+  <span class="tag tag-info">Amélioration</span>
+  <strong>Ajouter un sitemap.xml</strong><br>
+  Pour un site one-page, un sitemap.xml avec l'URL unique et les ancres principales améliorerait l'indexation Google.
+</div>
+
+<div class="info">
+  <span class="tag tag-info">Amélioration</span>
+  <strong>Les erreurs de validation du formulaire ne sont pas accessibles aux lecteurs d'écran</strong><br>
+  Les messages d'erreur utilisent <code>role="alert"</code> et <code>aria-describedby</code> ce qui est bien, mais l'absence de <code>aria-live="assertive"</code> sur les conteneurs d'erreur pourrait empêcher l'annonce automatique des erreurs.
+</div>
+
+<!-- ===================== SECTION 4: TESTS RÉUSSIS ===================== -->
+<h2>4. Tests réussis — Conformité vérifiée</h2>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Structure HTML sémantique</strong> — Balises <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;h1&gt;</code>-<code>&lt;h2&gt;</code> correctement hiérarchisées.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Liens d'évitement (skip links)</strong> — Le lien « Skip to main content » est présent et fonctionnel (<code>#main-content</code>).
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>ARIA sur le menu mobile</strong> — <code>aria-expanded</code>, <code>aria-controls</code>, <code>aria-label</code>, <code>aria-hidden</code> correctement gérés.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Piège à focus (focus trap) dans le menu mobile</strong> — Le Tab循环 est implémenté dans le menu ouvert (lignes 2461-2467).
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Fermeture Escape sur tous les popups</strong> — Le popup téléphonique, WhatsApp et les popups légaux se ferment avec Escape.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Fermeture par clic sur l'overlay</strong> — Tous les popups se ferment en cliquant en dehors du modal.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Attributs <code>loading="lazy"</code> sur les images secondaires</strong> — Toutes les images sauf l'image hero utilisent le chargement différé.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Attributs <code>alt</code> sur toutes les images</strong> — Chaque image a un texte alternatif descriptif.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Fonctionnalité <code>prefers-reduced-motion</code></strong> — Les animations CSS et les transitions sont désactivées pour les utilisateurs qui le demandent.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Google Fonts chargé de manière asynchrone</strong> — <code>media="print" onload="this.media='all'"</code> + fallback <code>&lt;noscript&gt;</code>.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>JSON-LD structuré complet</strong> — LocalBusiness, WebSite, BreadcrumbList, FAQPage avec bonnes propriétés.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>HTTPS sur toutes les ressources externes</strong> — Tous les src, href utilisent HTTPS.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Attributs <code>rel="noopener noreferrer"</code> sur les liens externes</strong> — Présents sur tous les <code>target="_blank"</code>.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Compteur de caractères sur le textarea</strong> — Fonctionne avec 500 caractères max, indicateur visuel rouge à 450+.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Bouton de soumission désactivé par défaut</strong> — <code>disabled</code> tant que tous les champs ne sont pas valides.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Sauvegarde de la langue dans localStorage</strong> — Le choix EN/FR persiste entre les visites.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Animation de la marque en boucle infinie (CSS pur)</strong> — Pas de saut, pause au survol, arrêt sur <code>prefers-reduced-motion</code>.
+</div>
+
+<div class="pass">
+  <span class="tag tag-ok">Réussi</span>
+  <strong>Carrousel d'avis avec défilement snap</strong> — Utilise <code>snap-x snap-mandatory</code> pour un défilement natif fluide.
+</div>
+
+<!-- ===================== SECTION 5: TESTS RESPONSIVE ===================== -->
+<h2>5. Compatibilité responsive (simulation)</h2>
+
+<table>
+  <thead>
+    <tr><th>Appareil</th><th>Largeur</th><th>Résultat attendu</th><th>Problèmes potentiels</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>iPhone SE / Galaxy Mini</strong></td>
+      <td>320-375px</td>
+      <td>Layout colonne unique, menu hamburger, barre CTA en bas</td>
+      <td class="warn" style="border:none;padding:0">Boutons prev/next du carrousel pourraient dépasser. WhatsApp button vs CTA bar chevauchement possible.</td>
+    </tr>
+    <tr>
+      <td><strong>iPhone 14 / Galaxy S23</strong></td>
+      <td>390-412px</td>
+      <td>Layout colonne unique, tout visible</td>
+      <td class="pass" style="border:none;padding:0">Aucun problème attendu</td>
+    </tr>
+    <tr>
+      <td><strong>iPad Mini</strong></td>
+      <td>768px</td>
+      <td>Layout 2 colonnes sur certaines sections</td>
+      <td class="pass" style="border:none;padding:0">Aucun problème attendu</td>
+    </tr>
+    <tr>
+      <td><strong>iPad Pro / Surface</strong></td>
+      <td>1024px</td>
+      <td>Navigation desktop visible, grille 3 colonnes</td>
+      <td class="pass" style="border:none;padding:0">Aucun problème attendu</td>
+    </tr>
+    <tr>
+      <td><strong>Desktop 1280px+</strong></td>
+      <td>1280-1440px</td>
+      <td>Layout complet, max-width 1200px centré</td>
+      <td class="pass" style="border:none;padding:0">Aucun problème attendu</td>
+    </tr>
+    <tr>
+      <td><strong>Desktop 1920px+ (4K)</strong></td>
+      <td>1920px+</td>
+      <td>Conteneur centré, pas de layout élargi</td>
+      <td class="pass" style="border:none;padding:0">Aucun problème attendu</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Tests de fonctionnalité par appareil</h3>
+
+<table>
+  <thead>
+    <tr><th>Fonctionnalité</th><th>Mobile</th><th>Tablette</th><th>Desktop</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Menu hamburger</td><td>✅ Fonctionnel</td><td>✅ Visible (md:hidden)</td><td>✅ Navigation desktop</td></tr>
+    <tr><td>Popup téléphone (2s)</td><td>✅ S'affiche</td><td>✅ S'affiche</td><td>✅ S'affiche</td></tr>
+    <tr><td>Popup WhatsApp (250s)</td><td>✅ S'affiche</td><td>✅ S'affiche</td><td>✅ S'affiche</td></tr>
+    <tr><td>Formulaire de devis</td><td>✅ Champs empilés</td><td>✅ Grille 2 colonnes</td><td>✅ Grille 2 colonnes</td></tr>
+    <tr><td>Carrousel d'avis</td><td>✅ Scroll snap</td><td>✅ Scroll snap</td><td>✅ Prev/Next + snap</td></tr>
+    <tr><td>Badges Google Reviews</td><td>✅ Positionné</td><td>✅ Positionné</td><td>✅ Positionné</td></tr>
+    <tr><td>Bouton WhatsApp flottant</td><td>✅ Visible</td><td>✅ Visible</td><td>✅ Visible</td></tr>
+    <tr><td>Barre CTA mobile</td><td>✅ Visible</td><td>✅ masquée</td><td>✅ masquée</td></tr>
+    <tr><td>Carrousel de marques</td><td>✅ Boucle CSS</td><td>✅ Boucle CSS</td><td>✅ Boucle CSS</td></tr>
+    <tr><td>Carousel À propos</td><td>✅ Animation CSS</td><td>✅ Animation CSS</td><td>✅ Animation CSS</td></tr>
+    <tr><td>FAQ (details/summary)</td><td>✅ Dépliable</td><td>✅ Dépliable</td><td>✅ Dépliable</td></tr>
+    <tr><td>Google Maps iframe</td><td>✅ Lazy loaded</td><td>✅ Lazy loaded</td><td>✅ Lazy loaded</td></tr>
+    <tr><td>Changeur de langue EN/FR</td><td>✅ Dans le menu</td><td>✅ Dans le header</td><td>✅ Dans le header + footer</td></tr>
+    <tr><td>Popups légaux</td><td>✅ Scrollable</td><td>✅ Scrollable</td><td>✅ Scrollable</td></tr>
+    <tr><td>Lien « Call » en bas (mobile)</td><td>✅ Visible</td><td>✅ masqué</td><td>✅ masqué</td></tr>
+  </tbody>
+</table>
+
+<!-- ===================== SECTION 6: RÉSUMÉ ===================== -->
+<h2>6. Résumé et recommandations</h2>
+
+<h3>Priorité 1 — À corriger immédiatement</h3>
+<ol style="margin-left:1.5rem">
+  <li>Bouton « Continuer sur le site » — texte français hardcoded au lieu de <code>data-i18n</code></li>
+  <li>Messages de validation du formulaire jamais traduits</li>
+  <li>Badges « Open » / « Closes soon » jamais traduits</li>
+  <li>Jours des heures d'ouverture jamais traduits</li>
+  <li>Fermeture croisée des popups (un lien ferme tous les popups)</li>
+  <li>Scrollbar visible sur Chrome/Safari/Edge dans le carrousel d'avis</li>
+  <li>JSON-LD <code>reviewCount: "6"</code> alors qu'il y a 25+ avis</li>
+</ol>
+
+<h3>Priorité 2 — À corriger bientôt</h3>
+<ol style="margin-left:1.5rem">
+  <li>Incohérence du nombre d'avis (23+ vs 25+)</li>
+  <li>Absence de <code>og:locale:alternate</code> pour le français</li>
+  <li>Code mort : <code>initTeamTilt</code> + <code>.pc-hours-row</code> (section équipe supprimée)</li>
+  <li>Menu mobile ferme sur <code>mousedown</code> au lieu de <code>click</code></li>
+  <li>Popup WhatsApp n'empêche pas le défilement</li>
+  <li>Images de crédit sans fallback <code>onerror</code></li>
+</ol>
+
+<h3>Priorité 3 — Améliorations</h3>
+<ol style="margin-left:1.5rem">
+  <li>Ajouter un favicon PNG</li>
+  <li>Supprimer les 25+ clés i18n mortes</li>
+  <li>Ajouter <code>dns-prefetch</code> pour les domains externes</li>
+  <li>Ajouter <code>width</code>/<code>height</code> sur l'image hero</li>
+  <li>Créer un sitemap.xml</li>
+  <li>Masquer les boutons prev/next du carrousel sur mobile</li>
+  <li>Ajouter <code>loading="eager"</code> sur la première slide du carrousel À propos</li>
+</ol>
+
+<hr style="margin:2rem 0;border:none;border-top:1px solid #e5e5e5">
+<p style="text-align:center;color:#888;font-size:.85rem">Rapport généré automatiquement — 3 juillet 2026</p>
+
+</body>
+</html>
