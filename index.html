@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title data-i18n="pageTitle">GOBY — Électroménagers de Prestige | Montréal</title>
+    <title data-i18n="pageTitle">GOBY - Électroménagers de Prestige | Montréal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -120,6 +120,29 @@
       .modal .modal-actions .btn{flex:1;min-width:140px;justify-content:center;padding:.7rem 1rem;font-size:.8rem}
       .modal .modal-body{position:relative}
 
+      .faq-item{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:.75rem;overflow:hidden;transition:border-color .3s}
+      .faq-item:hover{border-color:rgba(201,149,42,.2)}
+      .faq-q{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;padding:1.25rem 1.5rem;background:transparent;border:none;color:#fff;font-size:.9rem;font-weight:500;text-align:left;cursor:pointer;font-family:inherit;transition:color .3s}
+      .faq-q:hover{color:var(--gold)}
+      .faq-q .arrow{font-size:.65rem;color:var(--text2);transition:transform .3s;flex-shrink:0}
+      .faq-q.open .arrow{transform:rotate(180deg)}
+      .faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,1,.36,1),padding .4s;padding:0 1.5rem}
+      .faq-a.open{max-height:300px;padding:0 1.5rem 1.25rem}
+      .faq-a p{color:var(--text2);font-size:.85rem;line-height:1.7}
+
+      .page-guide{display:none;animation:fadePage .4s ease}
+      .page-guide.active{display:block}
+      @keyframes fadePage{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
+      .guide-nav{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+      .guide-nav a{padding:.5rem 1rem;border-radius:8px;font-size:.8rem;color:var(--text2);border:1px solid var(--border);transition:all .3s;cursor:pointer}
+      .guide-nav a:hover,.guide-nav a.active{color:var(--gold);border-color:var(--gold);background:rgba(201,149,42,.05)}
+      .guide-content h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:#fff;font-weight:600;margin-bottom:1rem}
+      .guide-content h4{font-size:.9rem;color:var(--gold);font-weight:500;margin:1.25rem 0 .5rem}
+      .guide-content p{color:var(--text2);font-size:.85rem;line-height:1.7;margin-bottom:.75rem}
+      .guide-content ul{padding-left:1.25rem;margin-bottom:1rem}
+      .guide-content ul li{color:var(--text2);font-size:.85rem;line-height:1.7;margin-bottom:.35rem;list-style:disc}
+      .guide-content ul li strong{color:#fff;font-weight:500}
+
       @media(max-width:768px){
         .catalog-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
         .modal{grid-template-columns:1fr}
@@ -140,6 +163,8 @@
         </a>
         <nav style="display:flex;align-items:center;gap:2.5rem;font-size:.8rem;font-weight:400;text-transform:uppercase;letter-spacing:.12em">
           <a href="#catalog" style="color:var(--text2);transition:color .3s" data-i18n="navCatalog" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Catalogue</a>
+          <a href="guide.html" style="color:var(--text2);transition:color .3s" data-i18n="navGuide" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Guide</a>
+          <a href="#faq" style="color:var(--text2);transition:color .3s" data-i18n="navFAQ" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">FAQ</a>
           <a href="#about" style="color:var(--text2);transition:color .3s" data-i18n="navAbout" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Maison</a>
           <a href="#contact" style="color:var(--text2);transition:color .3s" data-i18n="navContact" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Contact</a>
           <a href="https://wa.me/15147991291" target="_blank" rel="noopener" class="btn btn-gold" style="padding:.5rem 1.25rem;font-size:.7rem;text-transform:none;letter-spacing:normal" data-i18n="headerWA">WhatsApp</a>
@@ -229,7 +254,7 @@
               <span class="section-label" data-i18n="aboutLabel">Notre Maison</span>
               <h2 class="section-title" style="font-size:clamp(1.75rem,3.5vw,2.75rem)" data-i18n="aboutTitle">Où la qualité rencontre la confiance.</h2>
               <div class="gold-line"></div>
-              <p style="color:var(--text2);font-size:.95rem;line-height:1.8;margin-bottom:2rem" data-i18n="aboutDesc">Fondé à Montréal, GOBY repose sur une conviction simple : chaque maison mérite des appareils exceptionnels et un service à la hauteur. Nous inspectons personnellement chaque unité — neuve ou pré-appartenance — parce que votre cuisine ne devrait jamais faire de compromis.</p>
+              <p style="color:var(--text2);font-size:.95rem;line-height:1.8;margin-bottom:2rem" data-i18n="aboutDesc">Fondé à Montréal, GOBY repose sur une conviction simple : chaque maison mérite des appareils exceptionnels et un service à la hauteur. Nous inspectons personnellement chaque unité - neuve ou pré-appartenance - parce que votre cuisine ne devrait jamais faire de compromis.</p>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
                 <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem"><span style="display:inline-flex;width:2rem;height:2rem;border-radius:50%;background:rgba(201,149,42,.12);align-items:center;justify-content:center;font-size:.85rem">🚚</span> <span data-i18n="aboutFeat1">Livraison offerte</span></div>
                 <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem"><span style="display:inline-flex;width:2rem;height:2rem;border-radius:50%;background:rgba(201,149,42,.12);align-items:center;justify-content:center;font-size:.85rem">🔧</span> <span data-i18n="aboutFeat2">Installation pro</span></div>
@@ -257,12 +282,12 @@
           <div class="reveal">
             <span class="section-label" data-i18n="contactLabel">Contact</span>
             <h2 class="section-title" data-i18n="contactTitle">Parlons de votre projet.</h2>
-            <p style="color:var(--text2);margin:1rem auto 2.5rem;font-size:.95rem;line-height:1.7" data-i18n="contactDesc">Que vous équipiez une nouvelle cuisine ou remplaciez un seul appareil — nous sommes là pour conseiller, livrer et assurer le suivi.</p>
+            <p style="color:var(--text2);margin:1rem auto 2.5rem;font-size:.95rem;line-height:1.7" data-i18n="contactDesc">Que vous équipiez une nouvelle cuisine ou remplaciez un seul appareil - nous sommes là pour conseiller, livrer et assurer le suivi.</p>
           </div>
           <div class="reveal" style="display:grid;grid-template-columns:1fr;gap:.75rem;max-width:480px;margin:0 auto">
             <a href="https://wa.me/15147991291" target="_blank" rel="noopener" class="glow-card" style="display:flex;align-items:center;justify-content:center;gap:1rem;padding:1.5rem 2rem;text-decoration:none">
               <span style="font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--gold);font-weight:600">💬</span>
-              <div><span style="display:block;font-size:1.1rem;color:#fff;font-weight:500">(514) 799-1291</span><span style="font-size:.75rem;color:var(--text2)" data-i18n="contactWhatsAppSub">WhatsApp — réponse rapide</span></div>
+              <div><span style="display:block;font-size:1.1rem;color:#fff;font-weight:500">(514) 799-1291</span><span style="font-size:.75rem;color:var(--text2)" data-i18n="contactWhatsAppSub">WhatsApp - réponse rapide</span></div>
             </a>
             <a href="https://maps.google.com/?q=15+Rue+Legendre+O+Montreal+QC+H2N+1G9" target="_blank" rel="noopener" class="glow-card" style="display:flex;align-items:center;justify-content:center;gap:1rem;padding:1.5rem 2rem;text-decoration:none">
               <span style="font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--gold);font-weight:600">📍</span>
@@ -282,6 +307,102 @@
               <textarea name="message" required rows="3" placeholder="Votre message..." style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:.85rem 1.25rem;font-size:.85rem;color:#fff;font-family:inherit;outline:none;resize:vertical;transition:border-color .3s" data-i18n-placeholder="formMsgPlaceholder" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor=''"></textarea>
               <button type="submit" class="btn btn-gold" style="justify-content:center;width:100%;padding:.9rem" data-i18n="formSubmit">Envoyer →</button>
             </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="section" style="background:var(--bg2)">
+        <div class="container" style="max-width:720px">
+          <div class="reveal" style="text-align:center;margin-bottom:3rem">
+            <span class="section-label" data-i18n="faqLabel">FAQ</span>
+            <h2 class="section-title" data-i18n="faqTitle">Questions frequentes.</h2>
+            <p class="section-desc" style="margin:.75rem auto 0" data-i18n="faqDesc">Tout ce que vous devez savoir avant votre achat.</p>
+          </div>
+          <div class="reveal">
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFAQ(this)"><span data-i18n="faq1q">Quels sont vos delais de livraison ?</span><span class="arrow">▼</span></button>
+              <div class="faq-a"><p data-i18n="faq1a">Nous livrons sous 2-5 jours ouvrés partout sur l'ile de Montreal. La livraison est gratuite pour tout achat de 500 $ et plus.</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFAQ(this)"><span data-i18n="faq2q">Offrez-vous l'installation ?</span><span class="arrow">▼</span></button>
+              <div class="faq-a"><p data-i18n="faq2a">Oui, nous proposons l'installation professionnelle pour tout appareil neuf. Contactez-nous pour un devis personnalise.</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFAQ(this)"><span data-i18n="faq3q">Quelle est votre politique de retour ?</span><span class="arrow">▼</span></button>
+              <div class="faq-a"><p data-i18n="faq3a">Vous disposez de 30 jours pour retourner un appareil en bon etat. Les frais de retour peuvent s'appliquer. Consultez notre politique complete sur demande.</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFAQ(this)"><span data-i18n="faq4q">Proposez-vous des garanties ?</span><span class="arrow">▼</span></button>
+              <div class="faq-a"><p data-i18n="faq4a">Tous nos appareils neufs incluent la garantie fabricant. Les appareils certifies pre-appartenance sont couverts par une garantie GOBY de 90 jours.</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFAQ(this)"><span data-i18n="faq5q">Puis-je payer par virement Interac ?</span><span class="arrow">▼</span></button>
+              <div class="faq-a"><p data-i18n="faq5a">Oui, nous acceptons le virement Interac, les cartes de credit et PayPal. Contactez-nous pour les details de paiement.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="guideSection" class="section page-guide">
+        <div class="container">
+          <div class="reveal" style="text-align:center;margin-bottom:2rem">
+            <span class="section-label" data-i18n="guideLabel">Guide d'achat</span>
+            <h2 class="section-title" data-i18n="guideTitle">Comment choisir vos appareils.</h2>
+            <p class="section-desc" style="margin:.75rem auto 0" data-i18n="guideDesc">Nos conseils pour faire le bon choix, piece par piece.</p>
+          </div>
+          <nav class="guide-nav" id="guideNav">
+            <a href="guide.html" onclick="return showGuide('overview')" class="active" data-i18n="gNavOverview">Vue d'ensemble</a>
+            <a href="guide-washer.html" onclick="return showGuide('washer')" data-i18n="gNavWasher">Laveuse-secheuse</a>
+            <a href="guide-fridge.html" onclick="return showGuide('fridge')" data-i18n="gNavFridge">Refrigerateur</a>
+            <a href="guide-furnace.html" onclick="return showGuide('furnace')" data-i18n="gNavFurnace">Fournaise</a>
+          </nav>
+
+          <div class="guide-content page-guide active" id="guideOverview">
+            <h3 data-i18n="gOverviewTitle">Guide d'achat complet</h3>
+            <p data-i18n="gOverviewP1">Acheter un electro-menager est un investissement. Taille, efficacite energetique, fonctionnalites et budget sont les quatre piliers d'un choix eclaire.</p>
+            <p data-i18n="gOverviewP2">Parcourez nos guides specifiques pour chaque categorie :</p>
+            <ul>
+              <li><strong>Laveuse-secheuse</strong> - <span data-i18n="gOverviewLi1">Capacite, chargement frontal ou vertical, efficacite energetique.</span></li>
+              <li><strong>Refrigerateur</strong> - <span data-i18n="gOverviewLi2">Format, type de porte, technologies de conservation.</span></li>
+              <li><strong>Fournaise</strong> - <span data-i18n="gOverviewLi3">Rendement AFUE, motorisation, compatibilite avec votre systeme.</span></li>
+            </ul>
+            <p data-i18n="gOverviewP3">Cliquez sur une categorie ci-dessus pour des conseils detailles.</p>
+          </div>
+
+          <div class="guide-content page-guide" id="guideWasher">
+            <h3 data-i18n="gWasherTitle">Choisir une laveuse-secheuse</h3>
+            <h4 data-i18n="gWasherH1">1. Type de chargement</h4>
+            <p data-i18n="gWasherP1">Frontale : meilleure efficacite energetique, empilable, plus douce pour les vetements. Verticale : chargement plus facile, cycles plus rapides, cout initial souvent plus bas.</p>
+            <h4 data-i18n="gWasherH2">2. Capacite</h4>
+            <p data-i18n="gWasherP2">4.5-5.0 pi3 pour un couple ou une petite famille. 5.0-5.5 pi3 pour une famille de 4+ personnes. Les tambours plus grands lavent plus en moins de brassees.</p>
+            <h4 data-i18n="gWasherH3">3. Efficacite et fonctionnalites</h4>
+            <p data-i18n="gWasherP3">Recherchez les certificats ENERGY STAR. La vapeur, les cycles rapides et le Wi-Fi sont des bonus pratiques pour un usage quotidien.</p>
+            <h4 data-i18n="gWasherH4">4. Budget</h4>
+            <p data-i18n="gWasherP4">Comptez 800-1200 $ pour un ensemble intermediaire et 1200-2000 $ pour un ensemble haut de gamme avec vapeur et connectivite.</p>
+          </div>
+
+          <div class="guide-content page-guide" id="guideFridge">
+            <h3 data-i18n="gFridgeTitle">Choisir un refrigerateur</h3>
+            <h4 data-i18n="gFridgeH1">1. Configuration</h4>
+            <p data-i18n="gFridgeP1">French door : elegant, acces facile, ideal pour les familles. Cote-a-cote : congelateur spacieux, distributeur d'eau integre. Porte simple : economique, compact, parfait pour studio ou sous-sol.</p>
+            <h4 data-i18n="gFridgeH2">2. Dimensions</h4>
+            <p data-i18n="gFridgeP2">Mesurez l'espace : hauteur, largeur et profondeur. Les modeles encastrables offrent un fini sur mesure mais coutent plus cher. Les modeles standard sont plus abordables.</p>
+            <h4 data-i18n="gFridgeH3">3. Technologies</h4>
+            <p data-i18n="gFridgeP3">Double refroidissement, zones de fraicheur ajustables, machine a glace, et eclairage LED sont des caracteristiques qui font la difference au quotidien.</p>
+            <h4 data-i18n="gFridgeH4">4. Budget</h4>
+            <p data-i18n="gFridgeP4">600-900 $ pour un modele standard, 1000-2000 $ pour un french door avec distributeur, 3000 $+ pour l'encastrable haut de gamme.</p>
+          </div>
+
+          <div class="guide-content page-guide" id="guideFurnace">
+            <h3 data-i18n="gFurnaceTitle">Choisir une fournaise</h3>
+            <h4 data-i18n="gFurnaceH1">1. Rendement AFUE</h4>
+            <p data-i18n="gFurnaceP1">L'AFUE mesure le pourcentage de carburant converti en chaleur. 80% est l'entree de gamme. 90-96% est recommande pour le climat quebecois. 97%+ est le haut de gamme le plus economique a long terme.</p>
+            <h4 data-i18n="gFurnaceH2">2. Motorisation</h4>
+            <p data-i18n="gFurnaceP2">Moteur a vitesse variable : confort optimal, silencieux, economie d'energie. Moteur mono-vitesse : cout initial reduit, mais moins efficace et plus bruyant.</p>
+            <h4 data-i18n="gFurnaceH3">3. Compatibilite</h4>
+            <p data-i18n="gFurnaceP3">Verifiez le type de combustible (gaz, electrique, propane), la taille de votre conduite et les normes d'evacuation. Faites inspecter par un professionnel avant l'achat.</p>
+            <h4 data-i18n="gFurnaceH4">4. Budget</h4>
+            <p data-i18n="gFurnaceP4">750-1000 $ pour un modele standard 80% AFUE. 1000-1500 $ pour un modele 96% AFUE. 1500-2500 $ pour le haut de gamme avec moteur variable et garantie prolongee.</p>
           </div>
         </div>
       </section>
@@ -305,7 +426,7 @@
           <span style="display:inline-flex;width:2rem;height:2rem;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#0a0a0a;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.75rem;font-weight:700">G</span>
           <span style="font-family:'Playfair Display',serif;font-size:.95rem;color:#fff">GOBY</span>
         </div>
-        <p style="font-size:.75rem;color:var(--text2);letter-spacing:.05em" data-i18n="footerCopy">© MMXXVI — GOBY Montréal</p>
+        <p style="font-size:.75rem;color:var(--text2);letter-spacing:.05em" data-i18n="footerCopy">© MMXXVI - GOBY Montréal</p>
         <div style="display:flex;gap:1.5rem;font-size:.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:.1em">
           <a href="https://www.facebook.com/gobysolutions" target="_blank" rel="noopener" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Facebook</a>
           <a href="https://wa.me/15147991291" target="_blank" rel="noopener" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">WhatsApp</a>
@@ -337,22 +458,22 @@
       const products = [
         {id:'wd1',cat:'washerDryer',name:'Samsung WF53BB8900AT + DVE53BB8900TA',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Samsung+Washer+%26+Dryer',descFR:'Ensemble laveuse-sécheuse Samsung haut de gamme. Capacité de 5.3 pi³, vapeur, Wi-Fi intégré, design premium noir mat.',descEN:'Premium Samsung washer-dryer set. 5.3 cu.ft capacity, steam, built-in Wi-Fi, premium matte black design.'},
         {id:'wd2',cat:'washerDryer',name:'LG WM4000HBA + DLEX4000B',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=LG+Washer+%26+Dryer',descFR:'Ensemble LG avec TurboWash, séchage intelligent et commandes intuitives. Efficacité énergétique certifiée.',descEN:'LG set with TurboWash, smart drying, and intuitive controls. Certified energy efficiency.'},
-        {id:'wd3',cat:'washerDryer',name:'Bosch 800 Series Washer & Dryer',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Bosch+800+Series',descFR:'Ensemble Bosch 800 Series — fabrication allemande, ultra silencieux, technologie anti-vibration, parfait pour espaces restreints.',descEN:'Bosch 800 Series set — German engineering, ultra-quiet, anti-vibration technology, perfect for tight spaces.'},
+        {id:'wd3',cat:'washerDryer',name:'Bosch 800 Series Washer & Dryer',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Bosch+800+Series',descFR:'Ensemble Bosch 800 Series - fabrication allemande, ultra silencieux, technologie anti-vibration, parfait pour espaces restreints.',descEN:'Bosch 800 Series set - German engineering, ultra-quiet, anti-vibration technology, perfect for tight spaces.'},
         {id:'wd4',cat:'washerDryer',name:'Whirlpool WET4027HW + WGD4027HW',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Whirlpool+Washer+%26+Dryer',descFR:'Ensemble Whirlpool fiable avec capteurs automatiques, cycles rapides et garantie prolongée.',descEN:'Reliable Whirlpool set with automatic sensors, quick cycles, and extended warranty.'},
         {id:'wd5',cat:'washerDryer',name:'GE GFW550SPSS + GFD550SPSS',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=GE+Washer+%26+Dryer',descFR:'Ensemble GE avec vapeur, démarrage différé et capacité familiale. Design élégant acier inoxydable.',descEN:'GE set with steam, delayed start and family capacity. Sleek stainless steel design.'},
-        {id:'wd6',cat:'washerDryer',name:'Maytag MHW6630HW + MED6630HW',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Maytag+Washer+%26+Dryer',descFR:'Ensemble Maytag commercial-grade — moteur robuste, cuve extra-large, cycle de nettoyage vapeur.',descEN:'Maytag commercial-grade set — robust motor, extra-large drum, steam cleaning cycle.'},
-        {id:'fr1',cat:'fridge',name:'Samsung RT18M6215SR',price:600,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Samsung+Refrigerator',descFR:'Réfrigérateur Samsung compact 18 pi³ — idéal pour cuisine de taille moyenne. Distributeur d\'eau et éclairage LED.',descEN:'Samsung compact 18 cu.ft refrigerator — ideal for mid-size kitchens. Water dispenser and LED lighting.'},
-        {id:'fr2',cat:'fridge',name:'LG LTCS20020S',price:750,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=LG+Refrigerator',descFR:'Réfrigérateur LG 20 pi³ — Smart Cooling, bac à légumes fraîcheur, étagères ajustables et finition acier.',descEN:'LG 20 cu.ft refrigerator — Smart Cooling, fresh vegetable crisper, adjustable shelves, steel finish.'},
-        {id:'fr3',cat:'fridge',name:'Bosch B36CL80SNS',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Bosch+Refrigerator',descFR:'Réfrigérateur Bosch encastrable 36 po — design minimaliste, refroidissement parfait, fabrication allemande.',descEN:'Bosch built-in 36" refrigerator — minimalist design, perfect cooling, German craftsmanship.'},
-        {id:'fu1',cat:'furnace',name:'Goodman GMEC96',price:750,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Goodman+Furnace',descFR:'Fournaise Goodman GMEC96 — 96% d\'efficacité, moteur à vitesse variable, silencieuse et fiable pour l\'hiver québécois.',descEN:'Goodman GMEC96 furnace — 96% efficiency, variable-speed motor, quiet and reliable for Quebec winters.'},
-        {id:'fu2',cat:'furnace',name:'Carrier 59TP6',price:800,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Carrier+Furnace',descFR:'Fournaise Carrier 59TP6 — technologie WeatherMaker, 96% AFUE, chauffage constant et confort supérieur.',descEN:'Carrier 59TP6 furnace — WeatherMaker technology, 96% AFUE, consistent heating and superior comfort.'},
-        {id:'fu3',cat:'furnace',name:'Lennox EL296E',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Lennox+Furnace',descFR:'Fournaise Lennox EL296E — 96% d\'efficacité, fonctionnement ultra silencieux, garantie 10 ans.',descEN:'Lennox EL296E furnace — 96% efficiency, ultra-quiet operation, 10-year warranty.'}
+        {id:'wd6',cat:'washerDryer',name:'Maytag MHW6630HW + MED6630HW',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Maytag+Washer+%26+Dryer',descFR:'Ensemble Maytag commercial-grade - moteur robuste, cuve extra-large, cycle de nettoyage vapeur.',descEN:'Maytag commercial-grade set - robust motor, extra-large drum, steam cleaning cycle.'},
+        {id:'fr1',cat:'fridge',name:'Samsung RT18M6215SR',price:600,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Samsung+Refrigerator',descFR:'Réfrigérateur Samsung compact 18 pi³ - idéal pour cuisine de taille moyenne. Distributeur d\'eau et éclairage LED.',descEN:'Samsung compact 18 cu.ft refrigerator - ideal for mid-size kitchens. Water dispenser and LED lighting.'},
+        {id:'fr2',cat:'fridge',name:'LG LTCS20020S',price:750,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=LG+Refrigerator',descFR:'Réfrigérateur LG 20 pi³ - Smart Cooling, bac à légumes fraîcheur, étagères ajustables et finition acier.',descEN:'LG 20 cu.ft refrigerator - Smart Cooling, fresh vegetable crisper, adjustable shelves, steel finish.'},
+        {id:'fr3',cat:'fridge',name:'Bosch B36CL80SNS',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Bosch+Refrigerator',descFR:'Réfrigérateur Bosch encastrable 36 po - design minimaliste, refroidissement parfait, fabrication allemande.',descEN:'Bosch built-in 36" refrigerator - minimalist design, perfect cooling, German craftsmanship.'},
+        {id:'fu1',cat:'furnace',name:'Goodman GMEC96',price:750,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Goodman+Furnace',descFR:'Fournaise Goodman GMEC96 - 96% d\'efficacité, moteur à vitesse variable, silencieuse et fiable pour l\'hiver québécois.',descEN:'Goodman GMEC96 furnace - 96% efficiency, variable-speed motor, quiet and reliable for Quebec winters.'},
+        {id:'fu2',cat:'furnace',name:'Carrier 59TP6',price:800,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Carrier+Furnace',descFR:'Fournaise Carrier 59TP6 - technologie WeatherMaker, 96% AFUE, chauffage constant et confort supérieur.',descEN:'Carrier 59TP6 furnace - WeatherMaker technology, 96% AFUE, consistent heating and superior comfort.'},
+        {id:'fu3',cat:'furnace',name:'Lennox EL296E',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Lennox+Furnace',descFR:'Fournaise Lennox EL296E - 96% d\'efficacité, fonctionnement ultra silencieux, garantie 10 ans.',descEN:'Lennox EL296E furnace - 96% efficiency, ultra-quiet operation, 10-year warranty.'}
       ];
 
       const lang = {
         fr: {
-          pageTitle: 'GOBY — Électroménagers de Prestige | Montréal',
-          navCatalog: 'Catalogue', navAbout: 'Maison', navContact: 'Contact',
+          pageTitle: 'GOBY - Électroménagers de Prestige | Montréal',
+          navCatalog: 'Catalogue', navGuide: 'Guide', navFAQ: 'FAQ', navAbout: 'Maison', navContact: 'Contact',
           headerWA: 'WhatsApp',
           heroTag: '✦ Électroménagers de Prestige',
           heroLine1: "L'art de", heroLine2: 'bien équiper', heroLine3: 'votre maison.',
@@ -367,13 +488,13 @@
           viewDetails: 'Voir les détails →',
           modalWA: '💬 WhatsApp', modalEmail: '✉️ Email', modalCall: '📞 Appeler',
           aboutLabel: 'Notre Maison', aboutTitle: 'Où la qualité rencontre la confiance.',
-          aboutDesc: 'Fondé à Montréal, GOBY repose sur une conviction simple : chaque maison mérite des appareils exceptionnels et un service à la hauteur. Nous inspectons personnellement chaque unité — neuve ou pré-appartenance — parce que votre cuisine ne devrait jamais faire de compromis.',
+          aboutDesc: 'Fondé à Montréal, GOBY repose sur une conviction simple : chaque maison mérite des appareils exceptionnels et un service à la hauteur. Nous inspectons personnellement chaque unité - neuve ou pré-appartenance - parce que votre cuisine ne devrait jamais faire de compromis.',
           aboutFeat1: 'Livraison offerte', aboutFeat2: 'Installation pro', aboutFeat3: 'Inspecté & certifié', aboutFeat4: 'Support après-vente',
           hoursTitle: 'Heures d\'ouverture',
           hoursMonFri: 'Lun–Ven', hoursSat: 'Samedi', hoursSun: 'Dimanche',
           contactLabel: 'Contact', contactTitle: 'Parlons de votre projet.',
-          contactDesc: 'Que vous équipiez une nouvelle cuisine ou remplaciez un seul appareil — nous sommes là pour conseiller, livrer et assurer le suivi.',
-          contactWhatsAppSub: 'WhatsApp — réponse rapide',
+          contactDesc: 'Que vous équipiez une nouvelle cuisine ou remplaciez un seul appareil - nous sommes là pour conseiller, livrer et assurer le suivi.',
+          contactWhatsAppSub: 'WhatsApp - réponse rapide',
           contactAddrSub: 'Montréal, QC H2N 1G9',
           contactEmailSub: 'Réponse sous 24h',
           formTitle: 'Envoyez-nous un message',
@@ -382,12 +503,42 @@
           formContactPlaceholder: 'Téléphone (ex: (514)-000-0000)',
           formMsgPlaceholder: 'Votre message...',
           formSubmit: 'Envoyer →',
+          faqLabel: 'FAQ', faqTitle: 'Questions frequentes.', faqDesc: 'Tout ce que vous devez savoir avant votre achat.',
+          faq1q: 'Quels sont vos delais de livraison ?', faq1a: 'Nous livrons sous 2-5 jours ouvrés partout sur l\'ile de Montreal. La livraison est gratuite pour tout achat de 500 $ et plus.',
+          faq2q: 'Offrez-vous l\'installation ?', faq2a: 'Oui, nous proposons l\'installation professionnelle pour tout appareil neuf. Contactez-nous pour un devis personnalise.',
+          faq3q: 'Quelle est votre politique de retour ?', faq3a: 'Vous disposez de 30 jours pour retourner un appareil en bon etat. Les frais de retour peuvent s\'appliquer. Consultez notre politique complete sur demande.',
+          faq4q: 'Proposez-vous des garanties ?', faq4a: 'Tous nos appareils neufs incluent la garantie fabricant. Les appareils certifies pre-appartenance sont couverts par une garantie GOBY de 90 jours.',
+          faq5q: 'Puis-je payer par virement Interac ?', faq5a: 'Oui, nous acceptons le virement Interac, les cartes de credit et PayPal. Contactez-nous pour les details de paiement.',
+          guideLabel: "Guide d'achat", guideTitle: 'Comment choisir vos appareils.', guideDesc: 'Nos conseils pour faire le bon choix, piece par piece.',
+          gNavOverview: "Vue d'ensemble", gNavWasher: 'Laveuse-secheuse', gNavFridge: 'Refrigerateur', gNavFurnace: 'Fournaise',
+          gOverviewTitle: "Guide d'achat complet",
+          gOverviewP1: 'Acheter un electro-menager est un investissement. Taille, efficacite energetique, fonctionnalites et budget sont les quatre piliers d\'un choix eclaire.',
+          gOverviewP2: 'Parcourez nos guides specifiques pour chaque categorie :',
+          gOverviewLi1: 'Capacite, chargement frontal ou vertical, efficacite energetique.',
+          gOverviewLi2: 'Format, type de porte, technologies de conservation.',
+          gOverviewLi3: 'Rendement AFUE, motorisation, compatibilite avec votre systeme.',
+          gOverviewP3: 'Cliquez sur une categorie ci-dessus pour des conseils detailles.',
+          gWasherTitle: 'Choisir une laveuse-secheuse',
+          gWasherH1: '1. Type de chargement', gWasherP1: 'Frontale : meilleure efficacite energetique, empilable, plus douce pour les vetements. Verticale : chargement plus facile, cycles plus rapides, cout initial souvent plus bas.',
+          gWasherH2: '2. Capacite', gWasherP2: '4.5-5.0 pi3 pour un couple ou une petite famille. 5.0-5.5 pi3 pour une famille de 4+ personnes. Les tambours plus grands lavent plus en moins de brassees.',
+          gWasherH3: '3. Efficacite et fonctionnalites', gWasherP3: 'Recherchez les certificats ENERGY STAR. La vapeur, les cycles rapides et le Wi-Fi sont des bonus pratiques.',
+          gWasherH4: '4. Budget', gWasherP4: 'Comptez 800-1200 $ pour un ensemble intermediaire et 1200-2000 $ pour un ensemble haut de gamme.',
+          gFridgeTitle: 'Choisir un refrigerateur',
+          gFridgeH1: '1. Configuration', gFridgeP1: 'French door : elegant, acces facile, ideal pour les familles. Cote-a-cote : congelateur spacieux, distributeur d\'eau integre. Porte simple : economique, compact.',
+          gFridgeH2: '2. Dimensions', gFridgeP2: 'Mesurez l\'espace : hauteur, largeur et profondeur. Les modeles encastrables offrent un fini sur mesure mais coutent plus cher.',
+          gFridgeH3: '3. Technologies', gFridgeP3: 'Double refroidissement, zones de fraicheur ajustables, machine a glace et eclairage LED font la difference.',
+          gFridgeH4: '4. Budget', gFridgeP4: '600-900 $ pour un modele standard, 1000-2000 $ pour un french door, 3000 $+ pour l\'encastrable haut de gamme.',
+          gFurnaceTitle: 'Choisir une fournaise',
+          gFurnaceH1: '1. Rendement AFUE', gFurnaceP1: 'L\'AFUE mesure le pourcentage de carburant converti en chaleur. 90-96% est recommande pour le climat quebecois.',
+          gFurnaceH2: '2. Motorisation', gFurnaceP2: 'Moteur a vitesse variable : confort optimal, silencieux, economie d\'energie. Moteur mono-vitesse : cout reduit mais moins efficace.',
+          gFurnaceH3: '3. Compatibilite', gFurnaceP3: 'Verifiez le type de combustible (gaz, electrique, propane), la taille de votre conduite et les normes d\'evacuation.',
+          gFurnaceH4: '4. Budget', gFurnaceP4: '750-1000 $ pour un modele standard 80% AFUE. 1000-1500 $ pour un modele 96% AFUE. 1500-2500 $ pour le haut de gamme.',
           waPopupText: '💬 Une question ? Envoyez-nous un message sur WhatsApp !',
-          footerCopy: '© MMXXVI — GOBY Montréal'
+          footerCopy: '© MMXXVI - GOBY Montréal'
         },
         en: {
-          pageTitle: 'GOBY — Premium Appliances | Montreal',
-          navCatalog: 'Catalog', navAbout: 'About', navContact: 'Contact',
+          pageTitle: 'GOBY - Premium Appliances | Montreal',
+          navCatalog: 'Catalog', navGuide: 'Guide', navFAQ: 'FAQ', navAbout: 'About', navContact: 'Contact',
           headerWA: 'WhatsApp',
           heroTag: '✦ Premium Appliances',
           heroLine1: 'The art of', heroLine2: 'equipping', heroLine3: 'your home.',
@@ -402,13 +553,13 @@
           viewDetails: 'View Details →',
           modalWA: '💬 WhatsApp', modalEmail: '✉️ Email', modalCall: '📞 Call',
           aboutLabel: 'Our House', aboutTitle: 'Where quality meets trust.',
-          aboutDesc: 'Founded in Montreal, GOBY is built on a simple belief: every home deserves exceptional appliances and every customer deserves exceptional care. We personally inspect every unit — new or pre-owned — because your kitchen shouldn\'t settle for less.',
+          aboutDesc: 'Founded in Montreal, GOBY is built on a simple belief: every home deserves exceptional appliances and every customer deserves exceptional care. We personally inspect every unit - new or pre-owned - because your kitchen shouldn\'t settle for less.',
           aboutFeat1: 'Free Delivery', aboutFeat2: 'Pro Installation', aboutFeat3: 'Inspected & Certified', aboutFeat4: 'After-Sales Support',
           hoursTitle: 'Business Hours',
           hoursMonFri: 'Mon–Fri', hoursSat: 'Saturday', hoursSun: 'Sunday',
           contactLabel: 'Contact', contactTitle: 'Let\'s talk about your project.',
-          contactDesc: 'Whether you\'re outfitting a new kitchen or replacing a single appliance — we\'re here to advise, deliver, and support.',
-          contactWhatsAppSub: 'WhatsApp — quick reply',
+          contactDesc: 'Whether you\'re outfitting a new kitchen or replacing a single appliance - we\'re here to advise, deliver, and support.',
+          contactWhatsAppSub: 'WhatsApp - quick reply',
           contactAddrSub: 'Montreal, QC H2N 1G9',
           contactEmailSub: 'Reply within 24h',
           formTitle: 'Send us a message',
@@ -417,8 +568,38 @@
           formContactPlaceholder: 'Phone (e.g. (514)-000-0000)',
           formMsgPlaceholder: 'Your message...',
           formSubmit: 'Send →',
+          faqLabel: 'FAQ', faqTitle: 'Frequently Asked Questions.', faqDesc: 'Everything you need to know before your purchase.',
+          faq1q: 'What are your delivery times?', faq1a: 'We deliver within 2-5 business days across Montreal island. Free delivery on orders of $500 and up.',
+          faq2q: 'Do you offer installation?', faq2a: 'Yes, we offer professional installation for all new appliances. Contact us for a custom quote.',
+          faq3q: 'What is your return policy?', faq3a: 'You have 30 days to return an appliance in good condition. Return fees may apply. See our full policy on request.',
+          faq4q: 'Do you offer warranties?', faq4a: 'All new appliances include the manufacturer warranty. Certified pre-owned appliances are covered by a 90-day GOBY warranty.',
+          faq5q: 'Can I pay by Interac e-Transfer?', faq5a: 'Yes, we accept Interac e-Transfer, credit cards, and PayPal. Contact us for payment details.',
+          guideLabel: 'Buying Guide', guideTitle: 'How to choose your appliances.', guideDesc: 'Our tips to make the right choice, piece by piece.',
+          gNavOverview: 'Overview', gNavWasher: 'Washer & Dryer', gNavFridge: 'Refrigerator', gNavFurnace: 'Furnace',
+          gOverviewTitle: 'Complete Buying Guide',
+          gOverviewP1: 'Buying an appliance is an investment. Size, energy efficiency, features and budget are the four pillars of an informed choice.',
+          gOverviewP2: 'Browse our specific guides for each category:',
+          gOverviewLi1: 'Capacity, front or top load, energy efficiency.',
+          gOverviewLi2: 'Size, door type, preservation technologies.',
+          gOverviewLi3: 'AFUE rating, motor type, compatibility with your system.',
+          gOverviewP3: 'Click a category above for detailed advice.',
+          gWasherTitle: 'Choosing a Washer & Dryer',
+          gWasherH1: '1. Load Type', gWasherP1: 'Front load: better energy efficiency, stackable, gentler on clothes. Top load: easier loading, faster cycles, often lower upfront cost.',
+          gWasherH2: '2. Capacity', gWasherP2: '4.5-5.0 cu.ft for a couple or small family. 5.0-5.5 cu.ft for a family of 4+. Larger drums wash more in fewer loads.',
+          gWasherH3: '3. Efficiency & Features', gWasherP3: 'Look for ENERGY STAR certification. Steam, quick cycles and Wi-Fi are practical daily bonuses.',
+          gWasherH4: '4. Budget', gWasherP4: '$800-1200 for a mid-range set and $1200-2000 for a premium set with steam and connectivity.',
+          gFridgeTitle: 'Choosing a Refrigerator',
+          gFridgeH1: '1. Configuration', gFridgeP1: 'French door: elegant, easy access, great for families. Side-by-side: spacious freezer, built-in water dispenser. Single door: budget-friendly, compact.',
+          gFridgeH2: '2. Dimensions', gFridgeP2: 'Measure your space: height, width and depth. Built-in models offer a custom finish but cost more. Standard models are more affordable.',
+          gFridgeH3: '3. Technologies', gFridgeP3: 'Dual cooling, adjustable freshness zones, ice maker, and LED lighting make a daily difference.',
+          gFridgeH4: '4. Budget', gFridgeP4: '$600-900 for a standard model, $1000-2000 for a french door with dispenser, $3000+ for premium built-in.',
+          gFurnaceTitle: 'Choosing a Furnace',
+          gFurnaceH1: '1. AFUE Rating', gFurnaceP1: 'AFUE measures the percentage of fuel converted to heat. 90-96% is recommended for Quebec\'s climate.',
+          gFurnaceH2: '2. Motor Type', gFurnaceP2: 'Variable-speed motor: optimal comfort, quiet, energy-saving. Single-speed motor: lower upfront cost but less efficient.',
+          gFurnaceH3: '3. Compatibility', gFurnaceP3: 'Check fuel type (gas, electric, propane), duct size, and venting requirements. Have a professional inspect before buying.',
+          gFurnaceH4: '4. Budget', gFurnaceP4: '$750-1000 for a standard 80% AFUE model. $1000-1500 for a 96% AFUE model. $1500-2500 for premium variable-speed.',
           waPopupText: '💬 Got a question? Send us a message on WhatsApp!',
-          footerCopy: '© MMXXVI — GOBY Montreal'
+          footerCopy: '© MMXXVI - GOBY Montreal'
         }
       };
 
@@ -529,6 +710,40 @@
       }
 
       document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+      function toggleFAQ(btn){
+        const answer = btn.nextElementSibling;
+        const isOpen = answer.classList.contains('open');
+        document.querySelectorAll('.faq-a.open').forEach(a => { a.classList.remove('open'); a.previousElementSibling.classList.remove('open'); });
+        if(!isOpen){ answer.classList.add('open'); btn.classList.add('open'); }
+      }
+
+      function showGuide(page){
+        const section = document.getElementById('guideSection');
+        section.classList.add('active');
+        document.querySelectorAll('.page-guide').forEach(g => g.classList.remove('active'));
+        const target = document.getElementById('guide' + page.charAt(0).toUpperCase() + page.slice(1));
+        if(target) target.classList.add('active');
+        document.querySelectorAll('#guideNav a').forEach(a => a.classList.remove('active'));
+        const link = document.querySelector('#guideNav a[href*="' + page + '"]');
+        if(link) link.classList.add('active');
+        document.getElementById('guideSection').scrollIntoView({ behavior: 'smooth' });
+        return false;
+      }
+
+      (function initFakePages(){
+        document.addEventListener('click', function(e){
+          const a = e.target.closest('a[href$=".html"]');
+          if(!a) return;
+          const page = a.getAttribute('href').replace('.html','');
+          const guidePages = ['guide','guide-washer','guide-fridge','guide-furnace'];
+          if(guidePages.includes(page)){
+            e.preventDefault();
+            if(page === 'guide') showGuide('overview');
+            else showGuide(page.split('-')[1]);
+          }
+        });
+      })();
 
       const waBubble = document.getElementById('waBubble');
       const waClose = document.getElementById('waClose');
