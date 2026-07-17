@@ -1,7 +1,0 @@
-build.*
-strip-*.js
-cleanup-*.js
-fix-*.js
-check-*.js
-index-350.html
-goby-350/
